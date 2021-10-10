@@ -27,6 +27,7 @@ void	print_hex(int n){
 	if (n >= 16)
 		put_char(n / 16 + 96);
 	put_char(n % 16 + '0');
+}
 
 void	ft_putstr_non_printable(char *str)
 {
