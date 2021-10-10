@@ -12,6 +12,22 @@
 
 void	ft_putchar(char c);
 
+void	process_vertical(int j, int x)
+{
+	if (j == 1 || j == x)
+		ft_putchar('o');
+	else
+		ft_putchar('-');
+}
+
+void	process_horizontal(int i, int y)
+{
+	if (i == 1 || i == y)
+		ft_putchar('o');
+	else
+		ft_putchar('|');
+}
+
 void	rush(int x, int y)
 {
 	int	i;
@@ -25,14 +41,12 @@ void	rush(int x, int y)
 		j = 0;
 		while (++j <= x)
 		{
-			if (j == 1 && (i == 1 || i == y))
-				ft_putchar('A');
-			else if (j == x && (i == 1 || i == y))
-				ft_putchar('C');
-			else if (i > 1 && i < y && j > 1 && j < x)
-				ft_putchar(' ');
+			if (i == 1 || i == y)
+				process_vertical(j, x);
+			else if (j == 1 || j == x)
+				process_horizontal(i,y);
 			else
-				ft_putchar('B');
+				ft_putchar(' ');
 		}
 		ft_putchar('\n');
 	}
