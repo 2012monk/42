@@ -9,7 +9,11 @@
 /*   Updated: 2021/10/10 21:42:46 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <unistd.h>
+void	ft_put_char(char c)
+{
+	write(1, &c, 1);
+}
 void	print_hex(int n)
 {
 	int	i;
@@ -23,9 +27,9 @@ void	print_hex(int n)
 		cur = n / i;
 		n %= i;	
 		if (i > 10)
-			put_char(cur + 'A' - 1);
+			ft_put_char(cur + 'A' - 1);
 		else
-			put_char(cur + '0');
+			ft_put_char(cur + '0');
 	}
 }
 
@@ -40,8 +44,11 @@ void	print_char(char *str)
 			ft_put_char('.');
 		else
 			ft_put_char(*str);
+		i++;
+		str++;
 	}
 }
+
 void	*ft_print_memory(void *addr, unsigned int size)
 {
 	unsigned int		i;
