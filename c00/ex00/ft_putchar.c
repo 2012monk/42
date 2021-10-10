@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 16:12:06 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 16:12:46 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 10:34:55 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 10:34:57 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	rush(int x, int y);
+#include <unistd.h>
 
-int	main(void)
+void	ft_putchar(char c)
 {
-	rush(1, 1);
-	return (0);
+	write(1, &c, 1);
 }

@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_print_reverse_alphabet.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 16:12:06 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 16:12:46 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 11:21:26 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 11:21:27 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	rush(int x, int y);
+#include <unistd.h>
 
-int	main(void)
+void	ft_put_char(char c)
 {
-	rush(1, 1);
-	return (0);
+	write(1, &c, 1);
+}
+void	ft_print_alphabet(void)
+{
+	char	letter;
+
+	letter = 'z';
+	while (letter >= 'a')
+	{
+		ft_put_char(letter--);
+	}
 }

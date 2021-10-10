@@ -6,29 +6,31 @@
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:38:36 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 18:38:39 by seounlee         ###   ########.fr       */
+/*   Updated: 2021/10/10 12:27:24 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_putchar(char c);
 
-void	rush(int w, int h)
+void	rush(int x, int y)
 {
 	int	i;
 	int	j;
 
+	if (x < 1 || y < 1)
+		return ;
 	i = 0;
-	while (++i <= h)
+	while (++i <= y)
 	{
 		j = 0;
-		while (++j <= w)
+		while (++j <= x)
 		{
 			if ((i == 1 && j == 1)
-				|| (i == h && j == w && w != 1 && h != 1))
+				|| (i == y && j == x && x != 1 && y != 1))
 				ft_putchar('A');
-			else if ((i == 1 && j == w) || (i == h && j == 1))
+			else if ((i == 1 && j == x) || (i == y && j == 1))
 				ft_putchar('C');
-			else if (i > 1 && i < h && j > 1 && j < w)
+			else if (i > 1 && i < y && j > 1 && j < x)
 				ft_putchar(' ');
 			else
 				ft_putchar('B');

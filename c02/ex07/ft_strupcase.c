@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strupcase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 16:12:06 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 16:12:46 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 19:34:13 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 19:37:34 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	rush(int x, int y);
-
-int	main(void)
+char	*ft_strupcase(char *str)
 {
-	rush(1, 1);
-	return (0);
+	char *ret;
+	char tmp;
+
+	ret = str;
+	while (*str)
+	{
+		if ('a' <= *str && 'z' >= *str)
+			*str = *str - 32;
+		str++;
+	}
+	return ret;
 }

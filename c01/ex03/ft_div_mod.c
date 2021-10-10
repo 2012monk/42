@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_div_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 16:12:06 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 16:12:46 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 17:58:16 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 17:59:05 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	rush(int x, int y);
-
-int	main(void)
+void	ft_div_mod(int a, int b, int *div, int *mod)
 {
-	rush(1, 1);
-	return (0);
+	*div = a / b;
+	*mod = a % b;
 }
+

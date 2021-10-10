@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 16:12:06 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 16:12:46 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 17:55:41 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 17:56:33 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	rush(int x, int y);
-
-int	main(void)
+void	ft_swap(int *a, int *b)
 {
-	rush(1, 1);
-	return (0);
+	int tmp;
+	
+	tmp = *a;
+	a = b;
+	b = tmp;
 }
+

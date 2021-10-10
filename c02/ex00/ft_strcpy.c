@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 16:12:06 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 16:12:46 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 18:51:34 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 19:18:25 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-void	rush(int x, int y);
+#include <stdio.h>
+char	*ft_strcpy(char *dest, char *src)
+{
+	while (*src)
+	{
+		*dest = *src;
+		src++;
+		dest++;
+	}
+	*dest = *src;
+	return dest;
+}
 
 int	main(void)
 {
-	rush(1, 1);
-	return (0);
+	char src[10];
+	char msg[10] = "hello";
+	ft_strcpy(src, msg);
+	printf("%s", src);
+	return 0;
 }

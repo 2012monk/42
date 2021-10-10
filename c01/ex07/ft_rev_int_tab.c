@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_rev_int_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 16:12:06 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 16:12:46 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 18:04:00 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 18:09:11 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	rush(int x, int y);
-
-int	main(void)
+void	ft_rev_int_tab(int *tab, int size)
 {
-	rush(1, 1);
-	return (0);
+	int tmp;
+	int i;
+
+	i = 0;
+	while(i < size / 2 + ^(size & 1))
+	{
+		tmp = tab[i];
+		tab[i] = tab[size - i];
+		tab[size - i] = tmp;
+		i++;
+	}
 }
+

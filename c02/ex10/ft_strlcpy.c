@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 16:12:06 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/09 16:12:46 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 19:50:25 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 20:04:52 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	rush(int x, int y);
-
-int	main(void)
+unsigned int ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	rush(1, 1);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	if (dest[i])
+		dest[i] = '\0';
+	if (i != 0)
+		i--;
+	return i;
 }
