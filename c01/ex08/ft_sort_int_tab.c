@@ -48,18 +48,7 @@ void	quick_sort(int *arr, int left, int right)
 	quick_sort(arr, pivot_i + 1, right);
 }
 
-void	ft_sotr_int_tab(int *tab, int size)
+void	ft_sort_int_tab(int *tab, int size)
 {
-	quick_sort(tab, 0, size);
+	quick_sort(tab, 0, size - 1);
 }
-
-// int main(int argc, char const *argv[])
-// {
-// 	int a[] = {9,8,7,6,5,4,4,2,1,0};
-// 	int *ptr = a;
-// 	ft_sotr_int_tab(ptr, 9);
-// 	for (int i=0;i<10;i++){
-// 		printf("%d ", ptr[i]);
-// 	}
-// 	return 0;
-// }

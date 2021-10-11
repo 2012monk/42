@@ -10,18 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+void	swap(int *a, int *b)
+{
+	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 void	ft_rev_int_tab(int *tab, int size)
 {
-	int tmp;
-	int i;
+	int	i;
+	int	mid;
 
 	i = 0;
-	while(i < size / 2 + ^(size & 1))
+	mid = size / 2 + size % 2;
+	while (i < mid)
 	{
-		tmp = tab[i];
-		tab[i] = tab[size - i];
-		tab[size - i] = tmp;
+		swap(&tab[i], &tab[size - i - 1]);
 		i++;
 	}
 }
-

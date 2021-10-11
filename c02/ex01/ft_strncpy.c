@@ -10,29 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-	int	i;
+	char	*start;
 
-	i = 0;
-	while (i < n)
+	start = dest;
+	while (n)
 	{
-		dest[i] = src[i];
-		i++;
+		*dest = *src;
+		if (*dest == 0)
+			break ;
+		dest++;
+		src++;
+		n--;
 	}
-	while (i < sizeof(dest))
+	if (n)
 	{
-		dest[i] = '\0';
-		i++;
+		while (--n)
+			*++dest = '\0';
 	}
-	return dest;
-}
-
-int main(void){
-	char dest[10];
-	char src[10] = "HELLO!!";
-	ft_strncpy(dest, src, 3);
-	printf("%s", dest);
-	return 0;
+	return (start);
 }

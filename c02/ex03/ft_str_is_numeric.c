@@ -14,9 +14,9 @@ int	ft_str_is_numeric(char *str)
 {
 	while (*str)
 	{
-		if ('0' > *str && *str > '9')
-			return 0;
+		if ('0' > *str || *str > '9')
+			return (0);
 		str++;
 	}
-	return 1;
+	return (1);
 }

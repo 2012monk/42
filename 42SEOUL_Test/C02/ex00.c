@@ -9,9 +9,9 @@ int main(void)
 	char* ret;
 
 	ret = ft_strcpy(buffer, text);
-	printf("%s - %d\n", buffer, (int)buffer - (int)ret);
+	printf("%s - %lld\n", buffer, (long long)buffer - (long long)ret);
 	ret = strcpy(buffer, text);
-	printf("%s - %d\n", buffer, (int)buffer - (int)ret);
+	printf("%s - %lld\n", buffer, (long long)buffer - (long long)ret);
     return 0;
 }
 

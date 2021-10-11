@@ -12,17 +12,16 @@
 
 unsigned int ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	int	i;
+	char	*start;
 
-	i = 0;
-	while (i < size - 1)
+	start = dest;
+	while (size)
 	{
-		dest[i] = src[i];
-		i++;
+		*dest = *src;
+		if (*dest == '\0')
+			break;
+		dest++;
+		src++;
+		size--;
 	}
-	if (dest[i])
-		dest[i] = '\0';
-	if (i != 0)
-		i--;
-	return i;
 }

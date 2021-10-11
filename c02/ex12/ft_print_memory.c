@@ -14,73 +14,63 @@ void	ft_put_char(char c)
 {
 	write(1, &c, 1);
 }
-void	print_hex(int n)
+void	print_dec_to_hex(unsigned long n, int size)
 {
-	int	i;
-	int	cur;
+	char	digit;
 
-	i = 16;
-	while (i < n)
-		i *= 16;
-	while (i != 0)
-	{
-		cur = n / i;
-		n %= i;	
-		if (i > 10)
-			ft_put_char(cur + 'A' - 1);
-		else
-			ft_put_char(cur + '0');
-	}
+	digit = '0';
+	if (size == 0)
+		return ;
+	print_dec_to_hex(n / 16, --size);
+	digit += ((n % 16) / 10) * ('a' - '0');
+	ft_put_char(digit + (n % 16 % 10));
 }
 
-void	print_char(char *str)
+void	safe_print_char(char *str, int length)
 {
-	int	i;
+	if (length == 0)
+		return ;
+	if (*str == 127 || *str < 33)
+		ft_put_char('.');
+	else
+		ft_put_char(*str);
+	safe_print_char(str + 1, length - 1);
+}
 
-	i = 0;
-	while (i < 16 && *str)
-	{
-		if (*str == 127 || *str < 33)
-			ft_put_char('.');
-		else
-			ft_put_char(*str);
-		i++;
-		str++;
-	}
+void	print_ascii_hex(char *str, int size)
+{
+	print_dec_to_hex((unsigned long) str, 2);
+	if (size % 2 != 0)
+		write(1, &" ", 1);
+	if (size > 0)
+		print_ascii_hex(str + 1, size - 1);
 }
 
 void	*ft_print_memory(void *addr, unsigned int size)
 {
-	unsigned int		i;
-	int		j;
+	int		i;
 	char	*str;
 	
-	i = 0;
+	i = (int) size;
 	str = (char *) addr;
-	while (i < size)
+	while (i > 0)
 	{
-		print_hex(&str[i]);
-		ft_put_char(':');
+		print_dec_to_hex((unsigned long)str, 16);
+		write(1, &": ", 2);
+		print_ascii_hex(str, 16 > i ? i : 10);
 		ft_put_char(' ');
-		j = 0;
-		while (j < 16 && *str)
-		{
-			print_hex(*str);
-			if (j % 2 == 0)
-				ft_put_char(' ');
-			j++;
-			str++;
-		}
-		ft_put_char(' ');
-		print_char(&str[i]);
+		safe_print_char(str, 16 > i ? i : 16);
 		ft_put_char('\n');
-		i += 16;
+		str += 16;
+		i -= 16;
 	}
+	return addr;
 }
 
+#include <stdio.h>
 int main(void)
 {
-	char msg[] = "Hello Wolrd!\n\n\ni just cant't help it -=~~\t\t\t\tls";
-	ft_print_memory(msg, 50);
+	char msg[] = "AHello Wolrd!\n\n\ni just cant't help it -=~~\t\t\t\tls";
+	ft_print_memory(msg, 2);
 	return 0;
 }

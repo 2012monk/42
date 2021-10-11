@@ -19,19 +19,11 @@ void	ft_put_char(char c)
 
 void	ft_print_numbers(void)
 {
-	int	i;
-	char arr[10];
+	int		i;
 
 	i = 0;
 	while (i < 10)
 	{
 		ft_put_char('0' + i++);
 	}
-	write(1, arr, 10);
-}
-
-int main(int argc, char const *argv[])
-{
-	ft_print_numbers();
-	return 0;
 }

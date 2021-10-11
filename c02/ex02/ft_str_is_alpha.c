@@ -10,21 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_str(char c)
-{
-	return ('A' <= c && c <= 'Z') || 
-			('a' <= c && c <= 'z');
-}
-
 int	ft_str_is_alpha(char *str)
 {
 	if (!(*str))
-		return 1;
+		return (1);
 	while (*str)
 	{
-		if (is_str(*str))
-			return 1;
+		if (('A' <= *str && *str <= 'Z')
+			|| ('a' <= *str && *str <= 'z'))
+			return (1);
 		str++;
 	}
-	return 0;
+	return (0);
 }	

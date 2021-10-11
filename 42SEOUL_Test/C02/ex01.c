@@ -13,14 +13,14 @@ int main(void)
 
 	memset(buffer, 0x25, 100);
 	ret = ft_strncpy(buffer, text, 5);
-	printf("%s - %d - %lu\n", buffer, (int)buffer - (int)ret, strlen(buffer));
+	printf("%s - %ld - %lu\n", buffer, (long)buffer - (long)ret, strlen(buffer));
 	memset(buffer, 0x25, 100);
 	ret = strncpy(buffer, text, 5);
-	printf("%s - %d - %lu\n", buffer, (int)buffer - (int)ret, strlen(buffer));
+	printf("%s - %ld - %lu\n", buffer, (long)buffer - (long)ret, strlen(buffer));
 
 	memset(buffer2, 0xCC, 100);
 	ret = ft_strncpy(buffer2, text, 100);
-	printf("%s - %d - %lu\n", buffer2, (int)buffer2 - (int)ret, strlen(buffer2));
+	printf("%s - %ld - %lu\n", buffer2, (long)buffer2 - (long)ret, strlen(buffer2));
 	for (i = 16; i < 100; i++)
 	{
 		if (buffer2[i] != 0)
@@ -31,7 +31,7 @@ int main(void)
 	}
 	memset(buffer2, 0xCC, 100);
 	ret = strncpy(buffer2, text, 100);
-	printf("%s - %d - %lu\n", buffer2, (int)buffer2 - (int)ret, strlen(buffer2));
+	printf("%s - %ld - %lu\n", buffer2, (long)buffer2 - (long)ret, strlen(buffer2));
 	for (i = 16; i < 100; i++)
 	{
 		if (buffer2[i] != 0)

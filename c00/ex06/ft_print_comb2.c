@@ -17,15 +17,10 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-char	_convert_to_nbr(int n)
-{
-	return '0' + n;
-}
-
 void	put_nbr(int n)
 {
-	ft_putchar(_convert_to_nbr(n / 10));
-	ft_putchar(_convert_to_nbr(n % 10));
+	ft_putchar('0' + (n / 10));
+	ft_putchar('0' + (n % 10));
 }
 
 void	ft_print_comb2(void)
@@ -36,7 +31,7 @@ void	ft_print_comb2(void)
 	i = 0;
 	while (i < 99)
 	{
-		j = i;
+		j = i + 1;
 		while (j <= 99)
 		{
 			put_nbr(i);
@@ -50,10 +45,4 @@ void	ft_print_comb2(void)
 		}
 		i++;
 	}
-}
-
-int main(void)
-{
-	ft_print_comb2();
-	return 0;
 }

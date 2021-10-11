@@ -19,25 +19,18 @@ void	ft_putchar(char c)
 
 void	ft_putnbr(int n)
 {
-	char	tmp[10];
-	char	sign_char;
-	int		sign;
-	int		i;
+	int	carry;
+	int	digit;
 
-	i = 9;
-	tmp[i] = '0';
-	sign = 1;
+	carry = n / 10;
+	digit = n % 10;
 	if (n < 0)
 	{
-		sign_char = '-';
-		sign = -1;
+		ft_putchar('-');
+		carry = -carry;
+		digit = -digit;
 	}
-	while (n != 0)
-	{
-		tmp[i] = '0' + (n % 10) * sign;
-		n /= 10;
-		i--;
-	}
-	write(1, &sign_char, 1);
-	write(1, &tmp[i], 10 - i);
+	if (carry)
+		ft_putnbr(carry);
+	ft_putchar(digit + '0');
 }

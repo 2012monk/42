@@ -10,24 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+int	is_upper_case(char c)
+{
+	return ('A' <= c && 'Z' >= c);
+}
 
+int	is_lower_case(char	c)
+{
+	return ('a' <= c && 'z' >= c);
+}
+
+int	is_alphabet(char c)
+{
+	return (is_upper_case(c) || is_lower_case(c));
+}
+
+int	is_numeric(char c)
+{
+	return ('0' <= c && c <= '9');
+}
 char	*ft_strcapitalize(char *str)
 {
 	int	is_first;
+	char	*start;
 
 	is_first = 1;
+	start = str;
 	while (*str)
 	{
 		if (!is_first && is_upper_case(*str))
-			*str = *str + 32;
+			*str = *str - 'A' + 'a';
 		if (is_first && is_lower_case(*str))
 		{
 			is_first = 0;
-			*str = *str - 32;
+			*str = *str - 'a' + 'A';
 		}
-
-		if (*str == ' ')
-			is_first = 1;
+		is_first = ! is_alphabet(*str) && ! is_numeric(*str);
 		str++;
 	}
+	return (start);
 }

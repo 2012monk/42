@@ -12,45 +12,33 @@
 
 #include <unistd.h>
 
-char	g_out[10];
-char	g_delimiter[2];
-int		g_length;
-int		g_finished;
+int	g_length;
 
-void	print(char *str, int length)
+void	ft_put_char(char c)
 {
-	write(1, str, length);
+	write(c, &c, 1);
 }
 
-void	comb(int cur, int pos)
+void	comb(int cur, char out[], int remain, int size)
 {
 	if (cur > 10)
 		return ;
-	if (pos == g_length)
+	if (remain == 0)
 	{
-		print(g_out, g_length);
-		if (g_finished == 0)
-			print(g_delimiter, 2);
+		write(1, out, size);
+		if (out[0] != '0' + 10 - size)
+			write(1, &", ", 2);
 		return ;
 	}
-	if (cur == 10 - g_length && pos == 0)
-		g_finished = 1;
-	g_out[pos] = '0' + cur;
-	comb(cur + 1, pos + 1);
-	g_out[pos]++;
-	comb(cur + 1, pos);
+	out[size - remain] = cur + '0';
+	comb(cur + 1, out, remain - 1, size);
+	out[size - remain]++;
+	comb(cur + 1, out, remain, size);
 }
 
 void	ft_print_combn(int n)
 {
-	g_delimiter[0] = ',';
-	g_delimiter[1] = ' ';
-	g_length = n;
-	comb(0, 0);
-}
+	char	out[10];
 
-// int main(int argc, char const *argv[])
-// {
-// 	ft_print_combn(2);
-// 	return 0;
-// }
+	comb(0, out, n, n);
+}

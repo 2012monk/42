@@ -12,8 +12,7 @@
 
 char	*ft_strupcase(char *str)
 {
-	char *ret;
-	char tmp;
+	char	*ret;
 
 	ret = str;
 	while (*str)
@@ -22,5 +21,5 @@ char	*ft_strupcase(char *str)
 			*str = *str - 32;
 		str++;
 	}
-	return ret;
+	return (ret);
 }

@@ -12,7 +12,7 @@
 
 char	*ft_strlowcase(char *str)
 {
-	char *ret;
+	char	(*ret);
 
 	ret = str;
 	while (*str)
@@ -21,6 +21,5 @@ char	*ft_strlowcase(char *str)
 			*str = *str + 32;
 		str++;
 	}
-	return ret;
+	return (ret);
 }
-
