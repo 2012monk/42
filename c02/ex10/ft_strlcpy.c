@@ -10,18 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int ft_strlcpy(char *dest, char *src, unsigned int size)
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	char	*start;
+	unsigned int	count;
 
-	start = dest;
-	while (size)
+	count = 0;
+	while (1)
 	{
-		*dest = *src;
-		if (*dest == '\0')
-			break;
-		dest++;
+		if (count + 1 < size)
+		{
+			*dest = *src;
+			dest++;
+		}
+		if (!*src)
+			break ;
 		src++;
-		size--;
+		count++;
 	}
+	if (count >= size)
+		*dest = '\0';
+	return (count);
 }

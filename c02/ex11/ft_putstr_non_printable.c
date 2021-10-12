@@ -17,27 +17,30 @@ void	put_char(char c)
 	write(1, &c, 1);
 }
 
-int		is_printable(char c)
+int	is_printable(char c)
 {
-	return c != 127 && c > 32;
+	return (c != 127 && c >= 32);
 }
 
-void	print_hex(int n){
-	put_char('\\');
-	if (n >= 16)
-		put_char(n / 16 + 96);
-	put_char(n % 16 + '0');
+void	print_hex(int n)
+{
+	if (n < 0)
+		n = 0xff + n + 1;
+	put_char("0123456789abcdefg"[n / 16]);
+	put_char("0123456789abcdefg"[(n % 16)]);
 }
 
 void	ft_putstr_non_printable(char *str)
 {
 	while (*str)
 	{
-		if (is_printable(*str))
+		if (is_printable(*str) == 1)
 			put_char(*str);
 		else
-			print_hex(*str);
+		{
+			put_char('\\');
+			print_hex((int) *str);
+		}
 		str++;
 	}
 }
-
