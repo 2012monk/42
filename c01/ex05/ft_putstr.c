@@ -12,8 +12,17 @@
 
 #include <unistd.h>
 
+int	ft_strlen(char *str)
+{
+	int	length;
+
+	length = 0;
+	while (*str++)
+		length++;
+	return (length);
+}
+
 void	ft_putstr(char *str)
 {
-	while (*str)
-		write(1, str++, 1);
+	write(1, str, ft_strlen(str));
 }
