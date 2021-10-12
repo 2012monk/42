@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 11:15:38 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/12 11:15:40 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/12 18:24:17 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/12 18:24:18 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(char *s1, char *s2)
+char	*ft_strcat(char *dest, char *src)
 {
-	int	result;
+	char	*start;
 
-	result = 0;
-	while (*s2 && *s2 == *s1)
-	{
-		result += *s1++ - *s2++;
-	}
-	if (*s1)
-		result += *s1;
-	if (*s2)
-		result -= *s2;
-	return (result);
+	start = dest;
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = *src;
+	return (start);
 }
 
 #include <stdio.h>
 #include <string.h>
-int main(int argc, char const *argv[])
+int main()
 {
-	char orig[] = "123123";
-	char comp[] = "2222";
-	// printf("%d\n", strncmp(orig, comp, 3));
-	// printf("%d\n", ft_strncmp(orig, comp, 3));
-	printf("%d\n", strcmp(orig, comp));
-	printf("%d\n", ft_strcmp(orig, comp));
+	char t1[40];
+	char t2[] = "recieved";
+	strcpy(t1,"message ");
+	ft_strcat(t1, t2);
+	printf("%s", t1);
 	return 0;
 }

@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 19:20:56 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/10 19:37:55 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/12 19:57:02 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/12 20:02:22 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_alpha(char *str)
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	while (*str)
-	{
-		if (*str < 'A' || *str > 'z'
-			|| ('Z' < *str && *str < 'a'))
-			return (0);
-		str++;
-	}
-	return (1);
-}	
+	char	*start;
+
+	start = dest;
+	while (*dest)
+		dest++;
+	
+	while (*src && nb--)
+		*dest++ = *src++;
+	if (*dest)
+		*dest = '\0';
+	return (start);
+}
+
+int	main()
+{
+	char dest[40] = "helloWorld!";
+
+}
