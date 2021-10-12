@@ -22,7 +22,7 @@ int	is_printable(char c)
 	return (c != 127 && c >= 32);
 }
 
-void	print_hex(int n)
+void	char_to_hex(int n)
 {
 	if (n < 0)
 		n = 0xff + n + 1;
@@ -39,7 +39,7 @@ void	ft_putstr_non_printable(char *str)
 		else
 		{
 			put_char('\\');
-			print_hex((int) *str);
+			char_to_hex((int) *str);
 		}
 		str++;
 	}

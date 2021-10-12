@@ -12,7 +12,7 @@
 
 char	*ft_strlowcase(char *str)
 {
-	char	(*ret);
+	char	*ret;
 
 	ret = str;
 	while (*str)

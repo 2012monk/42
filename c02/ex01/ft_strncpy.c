@@ -15,7 +15,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	char	*start;
 
 	start = dest;
-	while (n)
+	while (n > 0)
 	{
 		*dest = *src;
 		if (*dest == 0)
@@ -24,9 +24,9 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 		src++;
 		n--;
 	}
-	if (n)
+	if (n > 0)
 	{
-		while (--n)
+		while (--n > 0)
 			*++dest = '\0';
 	}
 	return (start);

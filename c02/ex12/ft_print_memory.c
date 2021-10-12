@@ -9,11 +9,14 @@
 /*   Updated: 2021/10/10 21:42:46 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <unistd.h>
+
 void	ft_put_char(char c)
 {
 	write(1, &c, 1);
 }
+
 void	print_dec_to_hex(unsigned long n, int size)
 {
 	char	digit;
@@ -42,7 +45,7 @@ void	print_ascii_hex(char *str, int size)
 {
 	print_dec_to_hex((unsigned long) *str, 2);
 	if (size % 2 != 0)
-		write(1, &" ", 1);
+		ft_put_char(' ');
 	if (size > 1)
 		print_ascii_hex(str + 1, size - 1);
 }
@@ -51,33 +54,23 @@ void	*ft_print_memory(void *addr, unsigned int size)
 {
 	int		i;
 	char	*str;
-	
+	int		batch;
+
 	i = (int) size;
 	str = (char *) addr;
+	batch = 16;
 	while (i > 0)
 	{
 		print_dec_to_hex((unsigned long)str, 16);
 		write(1, &": ", 2);
-		print_ascii_hex(str, 16 > i ? i : 16);
+		print_ascii_hex(str, batch);
 		ft_put_char(' ');
-		safe_print_char(str, 16 > i ? i : 16);
+		safe_print_char(str, batch);
 		ft_put_char('\n');
 		str += 16;
 		i -= 16;
+		if (i < 16)
+			batch = i;
 	}
-	return addr;
+	return (addr);
 }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-// int main(void)
-// {
-// 	int fd = open("./t", O_RDONLY);
-// 	char buffer[200];
-// 	read(fd, buffer, 100);
-	
-
-// 	ft_print_memory(buffer, 10);
-// 	close(fd);
-// 	return 0;
-// }
