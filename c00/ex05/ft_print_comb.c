@@ -12,33 +12,34 @@
 
 #include <unistd.h>
 
-char	g_out[5];
-int		g_first;
+void	ft_put_char(char c)
+{
+	write(1, &c, 1);
+}
 
-void	comb(int cur, int pos)
+void	comb(int cur, int pos, char out[3])
 {
 	if (cur > 10)
 		return ;
 	if (pos == 3)
 	{
-		if (g_first != 1)
-			write(1, g_out, 5);
-		else
-			write(1, g_out, 3);
+		write(1, out, 3);
+		if (out[0] != '7')
+		{
+			ft_put_char(',');
+			ft_put_char(' ');
+		}
 		return ;
 	}
-	if (cur == 7 && pos == 0)
-		g_first = 1;
-	g_out[pos] = '0' + cur;
-	comb(cur + 1, pos + 1);
-	g_out[pos] += 1;
-	comb(cur + 1, pos);
+	out[pos] = '0' + cur;
+	comb(cur + 1, pos + 1, out);
+	out[pos] += 1;
+	comb(cur + 1, pos, out);
 }
 
 void	ft_print_comb(void)
 {
-	g_first = 0;
-	g_out[3] = ',';
-	g_out[4] = ' ';
-	comb(0, 0);
+	char	out[3];
+
+	comb(0, 0, out);
 }

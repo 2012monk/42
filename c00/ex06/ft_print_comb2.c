@@ -23,26 +23,27 @@ void	put_nbr(int n)
 	ft_putchar('0' + (n % 10));
 }
 
+void	put_delimiter(void)
+{
+	ft_putchar(',');
+	ft_putchar(' ');
+}
+
+void	comb_recursive(int start, int n)
+{
+	if (n > 99)
+		return ;
+	put_nbr(start);
+	ft_putchar(' ');
+	put_nbr(n);
+	if (!(start == 98 && n == 99))
+		put_delimiter();
+	comb_recursive(start, n + 1);
+	if (start < 99 && n == 99)
+		comb_recursive(start + 1, start + 2);
+}
+
 void	ft_print_comb2(void)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 99)
-	{
-		j = i + 1;
-		while (j <= 99)
-		{
-			put_nbr(i);
-			ft_putchar(' ');
-			put_nbr(j);
-			if (i == 98 && j == 99)
-				return ;
-			ft_putchar(',');
-			ft_putchar(' ');
-			j++;
-		}
-		i++;
-	}
+	comb_recursive(0, 1);
 }
