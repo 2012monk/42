@@ -32,55 +32,48 @@ void	print_dec_to_hex(unsigned long n, int size)
 
 void	safe_print_char(char *str, int length)
 {
-	if (length == 0)
-		return ;
 	if (*str == 127 || *str < 32)
 		ft_put_char('.');
 	else
 		ft_put_char(*str);
+	if (length <= 1)
+		return ;
 	safe_print_char(str + 1, length - 1);
 }
 
-void	print_ascii_hex(char *str, int size)
+void	print_ascii_hex(char *str, int size, int pos)
 {
 	print_dec_to_hex((unsigned long) *str, 2);
-	if (size % 2 != 0)
+	if (pos & 1)
 		ft_put_char(' ');
 	if (size > 1)
-		print_ascii_hex(str + 1, size - 1);
+		print_ascii_hex(str + 1, size - 1, pos + 1);
 }
 
 void	*ft_print_memory(void *addr, unsigned int size)
 {
-	int		i;
-	char	*str;
-	int		batch;
+	unsigned int		i;
+	unsigned int		batch;
+	int					length;
+	char				*str;
 
-	i = (int) size;
+	i = 0;
 	str = (char *) addr;
-	batch = size;
-	if (size > 16)
-		batch = 16;
-	while (i > 0)
-	{
-		print_dec_to_hex((unsigned long)str, 16);
-		write(1, &": ", 2);
-		print_ascii_hex(str, 16);
-		ft_put_char(' ');
-		safe_print_char(str, batch);
-		ft_put_char('\n');
-		str += 16;
-		i -= 16;
-		if (i < 16)
-			batch = i;
-	}
-	while (i < size)
+	batch = 16;
+	while (i * 16 < size)
 	{
 		print_dec_to_hex((unsigned long) str, 16);
 		write(1, ": ", 2);
-		print_ascii_hex(str, 16);
-		write(1, " ", 1);
-
+		if (i >= size / 16)
+			batch = size % 16;
+		print_ascii_hex(str, batch, 0);
+		length = (16 - batch) * 2 + (19 - batch) / 2;
+		while (length--)
+			write(1, " ", 1);
+		safe_print_char(str, batch);
+		write(1, "\n", 1);
+		i++;
+		str += 16;
 	}
 	return (addr);
 }
