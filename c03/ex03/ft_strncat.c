@@ -12,21 +12,15 @@
 
 char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	char	*start;
+	unsigned long	dst_size;
+	char			*start;
 
+	dst_size = sizeof(dest);
 	start = dest;
 	while (*dest)
 		dest++;
-	
 	while (*src && nb--)
 		*dest++ = *src++;
-	if (*dest)
-		*dest = '\0';
+	*dest = '\0';
 	return (start);
-}
-
-int	main()
-{
-	char dest[40] = "helloWorld!";
-
 }

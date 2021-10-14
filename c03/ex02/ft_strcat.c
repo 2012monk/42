@@ -22,15 +22,3 @@ char	*ft_strcat(char *dest, char *src)
 	*dest = *src;
 	return (start);
 }
-
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-	char t1[40];
-	char t2[] = "recieved";
-	strcpy(t1,"message ");
-	ft_strcat(t1, t2);
-	printf("%s", t1);
-	return 0;
-}

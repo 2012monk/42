@@ -12,8 +12,6 @@
 
 #include <unistd.h>
 
-int	g_length;
-
 void	ft_put_char(char c)
 {
 	write(c, &c, 1);
