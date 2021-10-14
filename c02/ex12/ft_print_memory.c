@@ -74,13 +74,4 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		if (i < 16)
 			batch = i;
 	}
-	while (i < size)
-	{
-		print_dec_to_hex((unsigned long) str, 16);
-		write(1, ": ", 2);
-		print_ascii_hex(str, 16);
-		write(1, " ", 1);
-
-	}
-	return (addr);
 }

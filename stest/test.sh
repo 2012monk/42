@@ -1,4 +1,5 @@
 #!/bin/sh
+export PRJ=$1
 complie() {
   files=$(find . -name "*.c" -not -name 'main.c' -exec basename {} \; | xargs echo "main.c ")
   gcc -o m $files 
@@ -24,4 +25,13 @@ compare() {
   mv main.c.bak main.c
 }
 # gcc -o m main.c rush04.c ft_putchar.c && ./m  && rm m
-compare
+# compare
+
+test_(){
+  if [[ $PRJ == "C02" ]]
+  then
+    echo "Hello"
+  fi
+}
+
+test_

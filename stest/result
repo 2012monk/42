@@ -5478,3 +5478,18 @@ input 1, 5
 test_5
 input 4, 4
 
+test_1
+input 5, 3
+
+test_2
+input 5, 1
+
+test_3
+input 1, 1
+
+test_4
+input 1, 5
+
+test_5
+input 4, 4
+
