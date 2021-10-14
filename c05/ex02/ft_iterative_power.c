@@ -28,11 +28,3 @@ int	ft_iterative_power(int nb, int power)
 	}
 	return (ret);
 }
-
-// #include <stdio.h>
-
-// int main(int argc, char const *argv[])
-// {
-// 	printf("%d %d", ft_iterative_power(2, 3), ft_iterative_power(0, 0));
-// 	return 0;
-// }
