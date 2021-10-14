@@ -52,9 +52,13 @@ int	ft_pow(int x, int e)
 
 int	convert_to_base(char *str, int map[], int digit, int radix)
 {
+	int	mask = 0;
+
 	if (digit < 0)
 		return (0);
-	return (ft_pow(radix, digit) * map[(int) *str]
+	// if (*str < 0)
+	// 	mask = 0x100;
+	return (ft_pow(radix, digit) * (map[(int) *str + mask])
 		+ convert_to_base(str + 1, map, digit - 1, radix));
 }
 
@@ -81,4 +85,15 @@ int	ft_atoi_base(char *str, char *base)
 	while (map[(int) str[digit]] != -1)
 		digit++;
 	return (sign * convert_to_base(str, map, digit - 1, radix));
+}
+
+#include <stdio.h>
+int main(int argc, char const *argv[])
+{
+	printf("%d\n", ft_atoi_base("\t\t\t\t---7fffffff", "0123456789abcdef"));
+	printf("%d\n", 0x7fffffff);
+	printf("%d\n", ft_atoi_base("-------1000000000000", "01"));
+	printf("%d\n", ft_atoi_base("\x88\x88\x88", "\xd3\x88"));
+	printf("%x", 0x100 + ((char) "\x88"));
+	return 0;
 }
