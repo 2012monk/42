@@ -12,30 +12,30 @@
 
 #include <unistd.h>
 
-void	ft_put_char(char c)
-{
-	write(1, &c, 1);
-}
+// void	ft_put_char(char c)
+// {
+// 	write(1, &c, 1);
+// }
 
 void	print_dec_to_hex(unsigned long n, int size)
 {
 	char	digit;
 
-	digit = '0';
+	digit = '0' + (n % 16 % 10);
 	if (size == 0)
 		return ;
 	print_dec_to_hex(n / 16, --size);
 	if (n % 16 > 9)
 		digit += 'a' - '0';
-	ft_put_char(digit + (n % 16 % 10));
+	write(1, &digit, 1);
 }
 
 void	safe_print_char(char *str, int length)
 {
 	if (*str == 127 || *str < 32)
-		ft_put_char('.');
+		write(1, ".", 1);
 	else
-		ft_put_char(*str);
+		write(1, str, 1);
 	if (length <= 1)
 		return ;
 	safe_print_char(str + 1, length - 1);
@@ -45,7 +45,7 @@ void	print_ascii_hex(char *str, int size, int pos)
 {
 	print_dec_to_hex((unsigned long) *str, 2);
 	if (pos & 1)
-		ft_put_char(' ');
+		write(1, " ", 1);
 	if (size > 1)
 		print_ascii_hex(str + 1, size - 1, pos + 1);
 }
@@ -71,7 +71,7 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		while (length--)
 			write(1, " ", 1);
 		safe_print_char(str, batch);
-		ft_put_char("\n");
+		write(1, "\n", 1);
 		i++;
 		str += 16;
 	}
@@ -90,10 +90,11 @@ int main(int argc, char const *argv[])
 		0x0a, 0x09, 0x6c, 0x6f, 0x6c, 0x2e, 0x6c, 0x6f, 0x6c, 0x0a, 0x20, 0x00, 0x72, 0x79, 0x0a, 0x0a,
 		0x0a, 0x09, 0x6c, 0x6f, 0x6c, 0x2e, 0x6c, 0x6f, 0x6c, 0x0a, 0x20, 0x00, 0x72, 0x79, 0x0a, 0x0a,
 		0x0a, 0x09, 0x6c, 0x6f, 0x6c, 0x2e, 0x6c, 0x6f, 0x6c, 0x0a, 0x20, 0x00 };
-	for (int i = 0; i < 140; i++)
-	{
-		ft_print_memory((void *) mem, i);
-	}
-	write(1, "\n", 1);
+	ft_print_memory((void *) mem, 110);
+	// for (int i = 0; i < 140; i++)
+	// {
+	// 	ft_print_memory((void *) mem, i);
+	// }
+	// write(1, "\n", 1);
 	return 0;
 }
