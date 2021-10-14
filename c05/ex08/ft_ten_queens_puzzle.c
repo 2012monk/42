@@ -17,7 +17,7 @@ int	g_horizontal[40];
 int	g_diagonal_l[40];
 int	g_diagonal_r[40];
 
-void	ft_putchar(char c)
+void	put_char(char c)
 {
 	write(1, &c, 1);
 }
@@ -34,10 +34,10 @@ void	print_queens(void)
 		while (++j < 10)
 		{
 			if (g_visited[i][j])
-				ft_putchar('0' + j);
+				put_char('0' + j);
 		}
 	}
-	ft_putchar('\n');
+	put_char('\n');
 }
 
 int	rec(int x)
