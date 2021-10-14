@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 19:20:56 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/10 19:37:55 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/13 20:31:07 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/13 20:31:09 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_alpha(char *str)
+int	ft_is_prime(int nb)
 {
-	while (('a' <= *str && *str <= 'z')
-		|| ('A' <= *str && *str <= 'Z'))
+	int	i;
+
+	if (nb < 2)
+		return (0);
+	i = 1;
+	while (++i < nb)
 	{
-		str++;
+		if (nb % i == 0)
+			return (0);
 	}
-	return (!*str);
+	return (1);
 }

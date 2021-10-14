@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 19:20:56 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/10 19:37:55 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/13 19:43:43 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/13 19:43:44 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_alpha(char *str)
+int	ft_iterative_factorial(int nb)
 {
-	while (('a' <= *str && *str <= 'z')
-		|| ('A' <= *str && *str <= 'Z'))
-	{
-		str++;
-	}
-	return (!*str);
+	int	ret;
+	int	i;
+
+	if (nb < 0)
+		return (0);
+	ret = 1;
+	i = 1;
+	while (i <= nb)
+		ret *= i++;
+	return (ret);
 }

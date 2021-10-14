@@ -1,7 +1,8 @@
 #!/bin/sh
 complie() {
+  norminette -R CheckForbiddenSourceHeader *
   files=$(find . -name "*.c" -not -name 'main.c' -exec basename {} \; | xargs echo "main.c ")
-  gcc -o m $files 
+  gcc -o m -Wall -Wextra -Werror $0
 }
 
 compare() {
@@ -23,5 +24,9 @@ compare() {
   done
   mv main.c.bak main.c
 }
-# gcc -o m main.c rush04.c ft_putchar.c && ./m  && rm m
-compare
+
+test() {
+  DIR=$(dirname "$BASH_SOURCE")
+  PJ=$1
+  complie $PJ/
+}

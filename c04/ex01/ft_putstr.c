@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 19:20:56 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/10 19:37:55 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/13 16:01:53 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/13 16:01:56 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_alpha(char *str)
+#include <unistd.h>
+
+int	ft_strlen(char *str)
 {
-	while (('a' <= *str && *str <= 'z')
-		|| ('A' <= *str && *str <= 'Z'))
+	int	length;
+
+	length = 0;
+	while ((*str) != '\0')
 	{
 		str++;
+		length++;
 	}
-	return (!*str);
+	return (length);
+}
+
+void	ft_putstr(char *str)
+{
+	write(1, str, ft_strlen(str));
 }

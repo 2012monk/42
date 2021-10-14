@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_fibonacci.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 19:20:56 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/10 19:37:55 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/13 20:11:27 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/13 20:11:28 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_alpha(char *str)
+int	ft_fibonacci(int index)
 {
-	while (('a' <= *str && *str <= 'z')
-		|| ('A' <= *str && *str <= 'Z'))
-	{
-		str++;
-	}
-	return (!*str);
+	if (index <= 1)
+		return (index);
+	return (ft_fibonacci(index - 1) + ft_fibonacci(index - 2));
 }

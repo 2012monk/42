@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_recursive_power.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 19:20:56 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/10 19:37:55 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/13 20:05:59 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/13 20:06:00 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_alpha(char *str)
+int	ft_recursive_power(int nb, int power)
 {
-	while (('a' <= *str && *str <= 'z')
-		|| ('A' <= *str && *str <= 'Z'))
-	{
-		str++;
-	}
-	return (!*str);
+	int	ret;
+
+	if (!power)
+		return (1);
+	ret = ft_recursive_power(nb, power / 2);
+	ret *= ret;
+	if (power & 1)
+		ret *= nb;
+	return (ret);
 }
