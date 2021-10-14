@@ -25,7 +25,7 @@ int	is_alphabet(char c)
 	return (is_upper_case(c) || is_lower_case(c));
 }
 
-int	is_numeric(char c)
+int	is_digit(char c)
 {
 	return ('0' <= c && c <= '9');
 }
@@ -47,7 +47,7 @@ char	*ft_strcapitalize(char *str)
 			if (is_lower_case(*str))
 				*str = *str - 'a' + 'A';
 		}
-		is_first = !(is_alphabet(*str) || is_numeric(*str));
+		is_first = !(is_alphabet(*str) || is_digit(*str));
 		str++;
 	}
 	return (start);

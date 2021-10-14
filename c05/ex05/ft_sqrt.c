@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 19:20:56 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/10 19:37:55 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/13 20:18:27 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/13 20:18:29 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_alpha(char *str)
+int	ft_sqrt(int nb)
 {
-	while (('a' <= *str && *str <= 'z')
-		|| ('A' <= *str && *str <= 'Z'))
+	int	lo;
+	int	hi;
+	int	mid;
+
+	lo = 1;
+	hi = nb;
+	while (lo <= hi)
 	{
-		str++;
+		mid = (lo + hi) / 2;
+		if (mid * mid == nb)
+			return (mid);
+		if (mid <= nb / mid)
+			lo = mid + 1;
+		else
+			hi = mid - 1;
 	}
-	return (!*str);
+	return (0);
 }

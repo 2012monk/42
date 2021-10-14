@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+
+// char	*ft_strncat(char *dest, char *src, unsigned int nb);
+
+unsigned int ft_strlcat(char *dest, char *src, unsigned int size);
+
+int main()
+{
+    char dest_comp[30];
+    char dest_orig[30];
+    char src[] = "world!";
+
+    printf("%s\n", dest_orig);
+    printf("%s\n", dest_comp);
+    printf("%lu ", strlcat(dest_orig, src, 6));
+    printf("%s\n", dest_orig);
+    printf("%u ", ft_strlcat(dest_comp, src, 6));
+    printf("%s\n", dest_comp);
+    for (int i=0;i<7;i++){
+        memset(dest_orig,0, 10);
+        memset(dest_comp,0, 10);
+        strcpy(dest_orig, "hello ");
+        strcpy(dest_comp, "hello ");
+        // printf("%s:%ld  %d\n",dest_comp, dest_comp - ft_strncat(dest_comp, src, i), 6 + i);
+        // printf("%s:%ld  %d\n",dest_orig, dest_orig - strncat(dest_orig, src, i), 6 + i);
+    }
+    
+    return 0;
+}

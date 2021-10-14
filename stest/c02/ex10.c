@@ -7,9 +7,9 @@ int main(int argc, char const *argv[])
 	char comp[100] = "original";
 	char orig[100] = "original";
 
-	printf("%lu %s origin\n", strlcpy(orig, msg, 10), orig);
+	printf("%lu %s origin\n", strlcpy(orig, msg, 2), orig);
 
-	printf("%u %s compare\n", ft_strlcpy(comp, msg, 10), comp);
+	printf("%u %s compare\n", ft_strlcpy(comp, msg, 2), comp);
 	
 	char text1[] = "salut, comment tu vas ? 42mots quarante-deux; cinquante+et+un";
 	char text1_[100];
@@ -36,10 +36,16 @@ int main(int argc, char const *argv[])
 	char res4[2000];
 	char res4_comp[2000];
 
-	printf("%d \n%s\n", ft_strlcpy(res4, test4, sizeof(test4)), res4);
-	printf("%lu \n%s\n", strlcpy(res4_comp, test4, sizeof(test4)), res4_comp);
+	printf("%d \n%s\n", ft_strlcpy(res4, test4, sizeof(res4)), res4);
+	printf("%lu \n%s\n", strlcpy(res4_comp, test4, sizeof(res4_comp)), res4_comp);
 	
-	
+	char test5[] = "hello\x8e\n\t\x09end";
+	char res5[100];
+	char res5_comp[100];
+
+	printf("%d \n%s\n", ft_strlcpy(res5, test5, sizeof(res5)), res5);
+	printf("%lu \n%s\n", strlcpy(res5_comp, test5, sizeof(res5_comp)), res5_comp);
+
 	return 0;
 
 
