@@ -71,7 +71,7 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		while (length--)
 			write(1, " ", 1);
 		safe_print_char(str, batch);
-		write(1, "\n", 1);
+		ft_put_char("\n");
 		i++;
 		str += 16;
 	}
