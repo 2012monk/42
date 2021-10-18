@@ -1,0 +1,26 @@
+
+// int main(int argc, char const *argv[])
+// {
+
+// 	char m0[] = "hello";
+// 	char m1[] = "world!";
+// 	char m2[] = "good bye";
+// 	char m3[] = "new York";
+
+// 	char *a[4];
+// 	a[0] = m0;
+// 	a[1] = m1;
+// 	a[2] = m2;
+// 	a[3] = m3;
+// 	// char *aa[] = {"a", "", "\n", "c", "\n", "d"};
+// 	// char* texts5[] = { "Diff", "OK", ":D", "\n", "Grade:", "100" };
+// 	// char *r = ft_strjoin(6, aa, "-");
+// 	// printf("%s %d <=> %d\n", r, ft_strlen(r), (int) strlen(r));
+// 	// char* texts6[] = { "Diff", "KO", "", "\n", "Grade:", "0" };
+// 	// // char *rr = ft_strjoin(6, aa, "123");
+// 	// char* texts4[] = { "Doom2 - Hell on earth" };
+// 	// char *d = ft_strjoin(1, texts4, " ^^ ");
+// 	// // printf("%s\n", rr);
+// 	// printf("%s %d\n", d, ft_strlen(d));
+// 	// printf("%s %d\n", d, (int)strlen(d));
+// }

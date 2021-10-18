@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_range.c                                         :+:      :+:    :+:   */
+/*   ft_ultimate_range.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 01:44:24 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/15 01:44:25 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/18 15:03:17 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/18 15:03:18 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,20 @@ unsigned long	f_abs(int n)
 	return (n);
 }
 
-int	*ft_range(int min, int max)
+int	ft_ultimate_range(int **range, int min, int max)
 {
-	int	*dst;
 	int	i;
 
 	if (min >= max)
-		return (NULL);
-	dst = (int *) malloc(sizeof(int) * f_abs(max - min));
-	if (!dst)
-		return (NULL);
+	{
+		range = NULL;
+		return (0);
+	}
+	*range = (int *) malloc(sizeof(int) * f_abs(max - min));
+	if (*range == NULL)
+		return (-1);
 	i = -1;
 	while ((++i + min) < max)
-		dst[i] = i + min;
-	return (dst);
+		range[0][i] = i + min;
+	return (f_abs(max - min));
 }
-
-// int main(int argc, char const *argv[])
-// {
-// 	int *p = ft_range(-__INT_MAX__-1, -2);
-// 	printf("%d ㅁㄴㅇㄹㅁㄴㅇㄹ\n", -__INT_MAX__ + 2);
-// 	// printf("%s\n", "woking");
-// 	if (!p)
-// 	{
-// 		printf("%s", "NULL RETURED");
-// 		return 1;
-// 	}
-// 	for (int i=0;i<16;i++)
-// 		printf("%d ", p[i]);
-// 	free(p);
-// 	return 0;
-// }
