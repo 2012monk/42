@@ -12,7 +12,7 @@
 
 #include "tower.h"
 
-int	count_boxes(int tab[g_size])
+int	count_boxes(int tab[], int size)
 {
 	int	cnt;
 	int	max;
@@ -21,7 +21,7 @@ int	count_boxes(int tab[g_size])
 	i = -1;
 	max = 0;
 	cnt = 0;
-	while (++i < g_size)
+	while (++i < size)
 	{
 		if (tab[i] && tab[i] > max)
 		{
@@ -32,49 +32,49 @@ int	count_boxes(int tab[g_size])
 	return (cnt);
 }
 
-int	check_line(int arr[], int left, int right)
+int	check_line_constraints(int arr[], int left, int right, int size)
 {
 	int	ret;
 
-	ret = count_boxes(arr) == left;
-	reverse_arr(arr, g_size);
-	return (ret && count_boxes(arr) == right);
+	ret = count_boxes(arr, size) == left;
+	reverse_arr(arr, size);
+	return (ret && count_boxes(arr, size) == right);
 }
 
-int	is_valid_move(int x, int y, int val)
+int	is_valid_move(t_status *status, int val, int x, int y)
 {
 	int	col[__MAX_SIZE__];
 	int	row[__MAX_SIZE__];
 	int	col_pass;
 	int	row_pass;
 
-	copy_col(g_grid, col, y, g_size);
-	copy_row(g_grid, row, x, g_size);
+	copy_col(status->grid, col, y, status->size);
+	copy_row(status->grid, row, x, status->size);
 	col[x] = val;
 	row[y] = val;
 	col_pass = 1;
 	row_pass = 1;
-	if (x == g_size - 1)
-		col_pass = check_line(col,
-				g_col_condition[y][0], g_col_condition[y][1]);
-	if (y == g_size - 1)
-		row_pass = check_line(row,
-				g_row_condition[x][0], g_row_condition[x][1]);
+	if (x == status->size - 1)
+		col_pass = check_line_constraints(col, status->col_constraints[y][LEFT],
+				status->col_constraints[y][RIGHT], status->size);
+	if (y == status->size - 1)
+		row_pass = check_line_constraints(row, status->row_constraints[x][LEFT],
+				status->row_constraints[x][RIGHT], status->size);
 	return (col_pass && row_pass);
 }
 
-void	find_free_cell(int *x, int *y)
+void	find_free_cell(int *x, int *y, int grid[][__MAX_SIZE__], int size)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (++i < g_size)
+	while (++i < size)
 	{
 		j = -1;
-		while (++j < g_size)
+		while (++j < size)
 		{
-			if (g_grid[i][j] == 0)
+			if (grid[i][j] == 0)
 			{
 				*x = i;
 				*y = j;
@@ -86,31 +86,24 @@ void	find_free_cell(int *x, int *y)
 	*y = -1;
 }
 
-int	solve(void)
+int	solve(t_status *status)
 {
 	int	x;
 	int	y;
 	int	c;
-	int	bit;
 
 	c = 0;
-	find_free_cell(&x, &y);
+	find_free_cell(&x, &y, status->grid, status->size);
 	if (x == -1 || y == -1)
 		return (1);
-	while (++c <= g_size)
+	while (++c <= status->size)
 	{
-		bit = 1 << c;
-		if ((g_row_candidates[y] & bit) || (g_col_candidates[x] & bit)
-			|| !is_valid_move(x, y, c))
+		if (is_used_box(x, y, c, status) || !is_valid_move(status, c, x, y))
 			continue ;
-		g_grid[x][y] = c;
-		g_col_candidates[x] |= bit;
-		g_row_candidates[y] |= bit;
-		if (solve())
+		place_box(x, y, c, status);
+		if (solve(status))
 			return (1);
-		g_grid[x][y] = 0;
-		g_col_candidates[x] &= MASK ^ bit;
-		g_row_candidates[y] &= MASK ^ bit;
+		delete_box(x, y, c, status);
 	}
 	return (0);
 }
