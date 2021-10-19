@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 
-unsigned int	fstrlen(char *s)
+unsigned int	ft_strlen(char *s)
 {
 	unsigned int	i;
 
@@ -34,7 +34,7 @@ char	*ft_strdup(char *src)
 	char			*dst;
 	unsigned int	size;
 
-	size = fstrlen(src) + 1;
+	size = ft_strlen(src) + 1;
 	dst = (char *) malloc(size);
 	if (!dst)
 		return (0);
