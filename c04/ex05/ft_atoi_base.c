@@ -12,9 +12,8 @@
 
 #include <unistd.h>
 
-int	fill_char_map(char *c, int map[])
+int	is_over_lap(unsigned char *c, int map[])
 {
-	int	cur;
 	int	i;
 
 	i = 0;
@@ -23,12 +22,9 @@ int	fill_char_map(char *c, int map[])
 	i = 0;
 	while (c[i])
 	{
-		cur = c[i];
-		if (cur < 0)
-			cur += 0xff + 1;
-		map[cur] += i + 1;
-		if (map[cur] != i || cur == '-'
-			|| cur == '+' || cur == ' ')
+		map[c[i]] += i + 1;
+		if (map[c[i]] != i || c[i] == '-'
+			|| c[i] == '+' || c[i] == ' ')
 			return (1);
 		i++;
 	}
@@ -44,37 +40,34 @@ int	ft_pow(int x, int e)
 	if (e == 1)
 		return (x);
 	ret = ft_pow(x, e / 2);
-	ret *= ret;
 	if (e & 1)
 		ret *= x;
-	return (ret);
+	return (ret * ret);
 }
 
-int	convert_to_base(char *str, int map[], int digit, int radix)
+int	convert_to_base(unsigned char *str, int map[], int digit, int radix)
 {
-	int	mask = 0;
-
 	if (digit < 0)
 		return (0);
-	// if (*str < 0)
-	// 	mask = 0x100;
-	return (ft_pow(radix, digit) * (map[(int) *str + mask])
+	return (ft_pow(radix, digit) * (map[*str])
 		+ convert_to_base(str + 1, map, digit - 1, radix));
 }
 
 int	ft_atoi_base(char *str, char *base)
 {
-	int	sign;
-	int	radix;
-	int	digit;
-	int	map[256];
+	unsigned char	*safe_str;
+	int				sign;
+	int				radix;
+	int				digit;
+	int				map[256];
 
+	safe_str = (unsigned char *) str;
 	sign = 1;
 	radix = 0;
 	digit = 0;
 	while (base[radix])
 		radix++;
-	if (radix <= 1 || fill_char_map(base, map))
+	if (radix <= 1 || is_over_lap(base, map))
 		return (0);
 	while (*str == '\v' || *str == '\f'
 		|| *str == '\t' || *str == '\r'
@@ -82,7 +75,7 @@ int	ft_atoi_base(char *str, char *base)
 		str++;
 	while (*str == '-' || *str == '+')
 		sign *= 44 - *str++;
-	while (map[(int) str[digit]] != -1)
+	while (map[str[digit]] != -1)
 		digit++;
 	return (sign * convert_to_base(str, map, digit - 1, radix));
 }
@@ -90,10 +83,28 @@ int	ft_atoi_base(char *str, char *base)
 #include <stdio.h>
 int main(int argc, char const *argv[])
 {
-	printf("%d\n", ft_atoi_base("\t\t\t\t---7fffffff", "0123456789abcdef"));
-	printf("%d\n", 0x7fffffff);
 	printf("%d\n", ft_atoi_base("-------1000000000000", "01"));
-	printf("%d\n", ft_atoi_base("\x88\x88\x88", "\xd3\x88"));
-	printf("%x", 0x100 + ((char) "\x88"));
+	printf("%d\n", ft_atoi_base("7fffffff", "0123456789abcdef")); // __INT_MAX__
+	printf("%d\n", ft_atoi_base("-80000000", "0123456789abcdef")); // -__INT_MAX__ - 1
+	printf("%d\n",ft_atoi_base("1111111111111111111111111111111", "01")); // __INT_MAX__
+	printf("%d\n",ft_atoi_base("-10000000000000000000000000000000", "01")); // -__INT_MAX__ - 1
+	printf("%d\n",ft_atoi_base("10000000000000000000000000000000", "10")); // __INT_MAX__
+	printf("%d\n", ft_atoi_base("abbacaab", "ab")); // 6
+	printf("%d\n", ft_atoi_base("1a123", "0123456789")); // 1
+	// Space Test
+	printf("%d\n", ft_atoi_base("\t\v\r\n   \f  111", "01")); // 7
+	printf("%d\n", ft_atoi_base("          \t\t\t\t \v\v\v \r \n+++++++++--+--+--+--+-1", "0123456789")); // -1
+	printf("%d\n", ft_atoi_base("\t\t\t\t---7fffffff", "0123456789abcdef"));
+	// OverFlow Test
+	printf("%d\n", ft_atoi_base("\x88\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3\xd3", "\xd3\x88")); // 8192
+	printf("%d\n", ft_atoi_base("\x88\xd3\x88\xd3", "\xd3\x88")); // 10
+	printf("%d\n", ft_atoi_base("\xfe\xf3\xfe\xde\xde", "\xfe\xf3")); // 2
+	// Validation Test
+	printf("%d\n", ft_atoi_base("41", ""));
+	printf("%d\n", ft_atoi_base("41", "1"));
+	printf("%d\n", ft_atoi_base("--++-41", "1-+"));
+	printf("%d\n", ft_atoi_base("020112", "10112"));
+	printf("%d\n", ft_atoi_base("00000", "10-"));
+	printf("%d\n", ft_atoi_base("  1  01001", "01"));
 	return 0;
 }
