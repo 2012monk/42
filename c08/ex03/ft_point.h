@@ -19,4 +19,4 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
-#endif // !FT_POINT_H
+#endif

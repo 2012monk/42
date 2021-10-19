@@ -17,7 +17,7 @@
 
 # define EVEN_MSG	"I have an even number of arguments.\n"
 
-# define ODD_MSG	"I have and odd number of arguments.\n"
+# define ODD_MSG	"I have an odd number of arguments.\n"
 
 # define EVEN(N)	N % 2 == 0
 
