@@ -23,7 +23,7 @@ int	len_words(char *str, int map[], int flag)
 	return (i);
 }
 
-void	ft_strcpy(char *dst, char *src, int size)
+void	ft_strncpy(char *dst, char *src, int size)
 {
 	while (*src && size--)
 		*dst++ = *src++;
@@ -82,26 +82,26 @@ char	**ft_split(char *str, char *charset)
 		dest[j] = (char *) malloc(sizeof(char) * len);
 		if (!dest[j])
 			return (NULL);
-		ft_strcpy(dest[j++], &str[i], len);
+		ft_strncpy(dest[j++], &str[i], len);
 		i += len;
 	}
 	return (dest);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int main(int argc, char const *argv[])
-{
-	// printf("%s", "dd");
-	char str[] = "h7e8  l 8    l7o wol rd ! ";
-	char c[] = " 78";
-	char **res = ft_split("", "12412");
-	char str1[] = "                         ";
-	char sep[] = "     ";
-	char **r = ft_split(str, sep);
-	for (int i=0;res[i];i++){
-		printf("%d %s\n",i, r[i]);
-	}
-	free(r);
-	return 0;
-}
+// int main(int argc, char const *argv[])
+// {
+// 	// printf("%s", "dd");
+// 	char str[] = "h7e8  l 8    l7o wol rd ! ";
+// 	char c[] = " 78";
+// 	char **res = ft_split("", "12412");
+// 	char str1[] = "                         ";
+// 	char sep[] = "     ";
+// 	char **r = ft_split(str, sep);
+// 	for (int i=0;res[i];i++){
+// 		printf("%d %s\n",i, r[i]);
+// 	}
+// 	free(r);
+// 	return 0;
+// }
