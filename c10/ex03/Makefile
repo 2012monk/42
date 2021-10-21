@@ -25,7 +25,7 @@ all: ${NAME}
 clean:
 	${RM} ${OBJS} 
 
-fclean: 
+fclean: clean 
 	${RM} ${NAME}
 
 .PHONY: all clean fclean e

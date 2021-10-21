@@ -29,21 +29,23 @@ void	throw_err(char *prog, char *path)
 		return ;
 	put_str(F_STDERR, basename(prog));
 	put_str(F_STDERR, ": ");
-    if (errno != -1)
-    {
-
-        put_str(F_STDERR, path);
-        put_str(F_STDERR, ": ");
-	    put_str(F_STDERR, strerror(errno));
-    }
-    else
-    {
-        put_str(F_STDERR, "illegal offset -- ");
-    }
+	put_str(F_STDERR, path);
+	put_str(F_STDERR, ": ");
+	put_str(F_STDERR, strerror(errno));
 	put_str(F_STDERR, "\n");
 	errno = 0;
 }
-
+void	throw_err_custom(char *prog, char *path, int err)
+{
+	if (err == 0)
+		return ;
+	put_str(F_STDERR, basename(prog));
+	put_str(F_STDERR, ": ");
+	put_str(F_STDERR, path);
+	put_str(F_STDERR, ": ");
+	put_str(F_STDERR, strerror(err));
+	put_str(F_STDERR, "\n");
+}
 int	is_directory(char *file)
 {
 	int	fd;
@@ -56,7 +58,5 @@ int	is_directory(char *file)
 }
 int	batch_file(int fd, char buf[], int size)
 {
-	if (fd < 0)
-		return (-1);
 	return (read(fd, buf, size));
 }
