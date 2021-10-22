@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_util.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/22 20:42:12 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/22 20:42:13 by seounlee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "hexdump.h"
 
 void	print_dec_to_hex(unsigned long n, int size)
@@ -25,4 +37,33 @@ void	print_ascii_hex(char *str, int size)
 	if (size <= 1)
 		return ;
 	print_ascii_hex(str + 1, size - 1);
+}
+
+void	ft_hexdump(char buf[], int end)
+{
+	int			i;
+
+	print_dec_to_hex(g_cur_size, 7 + g_option);
+	if (g_option)
+		f_print(" ");
+	f_print(" ");
+	i = -1;
+	while (++i < 16)
+	{
+		if (i < end)
+			print_dec_to_hex((unsigned long) buf[i], 2);
+		else
+			f_print("  ");
+		if (i == 7 && g_option)
+			f_print(" ");
+		if (i != 15)
+			f_print(" ");
+	}
+	if (g_option)
+	{
+		f_print("  |");
+		safe_print_char(buf, end);
+		f_print("|");
+	}
+	f_print("\n");
 }

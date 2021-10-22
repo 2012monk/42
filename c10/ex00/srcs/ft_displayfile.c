@@ -11,10 +11,23 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
 #include <unistd.h>
-
 #include <fcntl.h>
+
+void	f_print(char *str, int fd)
+{
+	while (*str)
+		write(fd, str++, 1);
+}
+
+void	exception(int ac)
+{
+	if (ac == 1)
+		f_print("File name missing.\n", 2);
+	else if (ac > 2)
+		f_print("Too many arguments.\n", 2);
+}
+
 int	main(int ac, char **av)
 {
 	int	fd;
@@ -23,17 +36,13 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		if (ac == 1)
-			write(1, "File name missing.\n", 19);
-		else if (ac > 2)
-			write(1, "Too many Arguments.\n", 20);
+		exception(ac);
 		return (1);
 	}
-
 	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
 	{
-		write(1, "Cannot read file.\n", 18);
+		f_print("Cannot read file.\n", 2);
 		return (1);
 	}
 	size = read(fd, buf, 1024);
