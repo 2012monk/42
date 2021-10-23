@@ -27,6 +27,7 @@ typedef struct s_map
 	char	*key;
 	char	*value;
 	int		num;
+	int		digit;
 }	t_map;
 
 extern t_map		**g_number_map;

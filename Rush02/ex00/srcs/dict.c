@@ -62,7 +62,11 @@ int	split_map(t_map **list, int size)
 			g_digit_map[digits++] = list[i];
 		}
 		else
+		{
+			list[i]->digit = ft_strlen(list[i]->key);
+			list[i]->num = list[i]->key - '0';
 			g_number_map[numbers++] = list[i];
+		}
 	}
 	free(list);
 	return (1);
