@@ -3,105 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 16:22:27 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/18 16:22:28 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/19 21:25:41 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/19 21:25:42 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include <stdio.h>
-int	len_words(char *str, int map[], int flag)
+void	ft_strncpy(char *dst, char *src, int len)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] && map[(unsigned char) str[i]] == flag)
-		i++;
-	return (i);
-}
-
-void	ft_strncpy(char *dst, char *src, int size)
-{
-	while (*src && size--)
+	while (*src && len--)
 		*dst++ = *src++;
 	*dst = '\0';
 }
 
-void	fill_charmap(char *str, int map[])
+int	is_seperator(char c, char *charset)
 {
 	int	i;
 
-	i = 0;
-	while (++i < 256)
-		map[i] = 1;
+	if (!charset)
+		return (0);
 	i = -1;
-	while (str[++i])
-		map[(unsigned char) str[i]] = 0;
+	while (charset[++i])
+	{
+		if (charset[i] == c)
+			return (1);
+	}
+	return (0);
 }
 
-int	get_words(char *str, int map[])
+int	count_words(char *str, char *charset)
 {
-	int	words;
 	int	i;
+	int	words;
 
 	i = 0;
 	words = 0;
 	while (str[i])
 	{
-		i += len_words(&str[i], map, 0);
+		if (is_seperator(str[i], charset))
+		{
+			i++;
+			continue ;
+		}
 		words++;
-		i += len_words(&str[i], map, 1);
+		while (str[i] && !is_seperator(str[i], charset))
+			i++;
 	}
-	return (i);
+	return (words);
+}
+
+char	**split_words(char *str, char *charset, char **dst)
+{
+	int	i;
+	int	j;
+	int	size;
+
+	i = 0;
+	j = 0;
+	while (str[j])
+	{
+		while (is_seperator(str[j], charset))
+			j++;
+		size = 0;
+		if (!str[j])
+			break ;
+		while (str[j + size] && !is_seperator(str[j + size], charset))
+			size++;
+		dst[i] = (char *) malloc(sizeof(char) * (size + 1));
+		if (!dst[i])
+			return (NULL);
+		ft_strncpy(dst[i], &str[j], size);
+		j += size;
+		i++;
+		if (!str[j])
+			break ;
+	}
+	return (dst);
 }
 
 char	**ft_split(char *str, char *charset)
 {
-	char	**dest;
-	int		i;
-	int		j;
-	int		map[256];
-	int		len;
+	char	**dst;
 
-	fill_charmap(charset, map);
-	dest = (char **) malloc(sizeof(char *) * get_words(str, map));
-	// printf("%d-----\n", get_words(str, map));
-	if (!dest)
+	if (str == NULL)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		i += len_words(&str[i], map, 0);
-		if (!str[i])
-			break ;
-		len = len_words(&str[i], map, 1);
-		dest[j] = (char *) malloc(sizeof(char) * len);
-		if (!dest[j])
-			return (NULL);
-		ft_strncpy(dest[j++], &str[i], len);
-		i += len;
-	}
-	return (dest);
+	dst = (char **) malloc(sizeof(char *) * (count_words(str, charset) + 1));
+	if (!dst)
+		return (NULL);
+	dst[count_words(str, charset)] = 0;
+	return (split_words(str, charset, dst));
 }
-
-// #include <stdio.h>
-
-// int main(int argc, char const *argv[])
-// {
-// 	// printf("%s", "dd");
-// 	char str[] = "h7e8  l 8    l7o wol rd ! ";
-// 	char c[] = " 78";
-// 	char **res = ft_split("", "12412");
-// 	char str1[] = "                         ";
-// 	char sep[] = "     ";
-// 	char **r = ft_split(str, sep);
-// 	for (int i=0;res[i];i++){
-// 		printf("%d %s\n",i, r[i]);
-// 	}
-// 	free(r);
-// 	return 0;
-// }

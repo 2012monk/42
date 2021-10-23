@@ -12,18 +12,6 @@
 
 #include <stdlib.h>
 
-#include <stdio.h>
-
-int	len_words(char *str, int map[], int flag)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && map[(unsigned char) str[i]] == flag)
-		i++;
-	return (i);
-}
-
 void	ft_strncpy(char *dst, char *src, int len)
 {
 	while (*src && len--)
@@ -31,77 +19,80 @@ void	ft_strncpy(char *dst, char *src, int len)
 	*dst = '\0';
 }
 
-void	fill_charmap(char *str, int map[])
+int	is_seperator(char c, char *charset)
 {
 	int	i;
 
-	i = 0;
-	map[0] = 1;
-	while (++i < 256)
-		map[i] = 0;
+	if (!charset)
+		return (0);
 	i = -1;
-	if (!str)
-		return ;
-	while (str[++i])
-		map[(unsigned char) str[i]] = 1;
+	while (charset[++i])
+	{
+		if (charset[i] == c)
+			return (1);
+	}
+	return (0);
 }
 
-int	is_seperator(char c, int map[])
-{
-	return (map[(unsigned char) c]);
-}
-
-int	count_words(char *str, int map[])
+int	count_words(char *str, char *charset)
 {
 	int	i;
 	int	words;
 
-	i = -1;
+	i = 0;
 	words = 0;
-	while (str[++i])
+	while (str[i])
 	{
-		if (is_seperator(str[i], map))
+		if (is_seperator(str[i], charset))
+		{
+			i++;
 			continue ;
+		}
 		words++;
-		while (str[i] && !is_seperator(str[i], map))
+		while (str[i] && !is_seperator(str[i], charset))
 			i++;
 	}
 	return (words);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**split_words(char *str, char *charset, char **dst)
 {
-	int		map[256];
-	char	**dst;
-	int		i;
-	int		j;
-	int		size;
+	int	i;
+	int	j;
+	int	size;
 
-	if (str == NULL)
-		return (NULL);
-	fill_charmap(charset, map);
-	dst = (char **) malloc(sizeof(char *) * (count_words(str, map) + 1));
-	if (!dst)
-		return (NULL);
 	i = 0;
-	j = -1;
-	dst[count_words(str, map)] = 0;
-	while (i < size && str[++j])
+	j = 0;
+	while (str[j])
 	{
-		dst[i] = NULL;
-		if (is_seperator(str[j], map))
-			continue ;
+		while (is_seperator(str[j], charset))
+			j++;
 		size = 0;
-		while (str[j + size] && !is_seperator(str[j + size], map))
+		if (!str[j])
+			break ;
+		while (str[j + size] && !is_seperator(str[j + size], charset))
 			size++;
 		dst[i] = (char *) malloc(sizeof(char) * (size + 1));
 		if (!dst[i])
 			return (NULL);
-		ft_strncpy(dst[i++], &str[j], size);
+		ft_strncpy(dst[i], &str[j], size);
 		j += size;
+		i++;
 		if (!str[j])
 			break ;
 	}
-	dst[i] = NULL;
 	return (dst);
+}
+
+char	**ft_split(char *str, char *charset)
+{
+	char	**dst;
+
+	if (str == NULL)
+		return (NULL);
+	dst = (char **) malloc(sizeof(char *) * (count_words(str, charset) + 1));
+	if (!dst)
+		return (NULL);
+	dst[count_words(str, charset)] = 0;
+	return (split_words(str, charset, dst));
 }
