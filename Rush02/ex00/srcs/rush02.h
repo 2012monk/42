@@ -13,31 +13,30 @@
 #ifndef RUSH02_H
 # define RUSH02_H
 
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <errno.h>
+# include <string.h>
+# include <libgen.h>
+# define BUF_SIZE 4096 
+
 typedef struct s_map
 {
 	char	*key;
 	char	*value;
-}	t_map;
-
-typedef struct s_num_map
-{
-	char	*value;
-	char	*key;
 	int		num;
-}	t_num_map;
+}	t_map;
 
 extern t_map		**g_number_map;
 
-extern t_num_map	**g_digit_map;
+extern t_map		**g_digit_map;
 
 extern char			**g_unique_map;
 
 // error == -1
 int		init(char *dict);
-
-int		fill_map(void);
-
-char	*read_file(int fd);
 
 char	**split_by_sep(char *str, char sep);
 
@@ -48,4 +47,18 @@ char	*find_digit(int n);
 char	*find_unique(int n);
 
 int		validate_input(char *str);
+char	**ft_split(char *str, char c);
+int		ft_strlen(char *str);
+void	f_memcpy(void *dst, void *src, unsigned int len);
+char	*strip(char *word);
+char	*lstrip(char *word);
+int		count_arr(char **strs);
+int		ft_atoi(char *str);
+void	free_list(t_map **list);
+void	free_words(char **strs);
+char	**get_lines(char *file);
+t_map	*creat_elem(char *key, char *val);
+int		add_elem(char **words, t_map **list, int idx);
+int		validate_key(char *key);
+int		validate_map(char **words);
 #endif // !RUSH02_H

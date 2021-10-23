@@ -2,9 +2,7 @@ TARGET = rush-02
 
 DIR = ./srcs/
 
-SRC = ${wildcard *.c}
-
-SRCS = ${addprefix ${DIR}, ${SRC}}
+SRCS = ${wildcard ./srcs/*.c}
 
 OBJ = ${SRCS:.c=.o}
 
@@ -16,9 +14,9 @@ CFLAGS = -Wall -Wextra -Werror
 	${CC} ${CFLAGS} -c $< -o $@
 
 ${TARGET}: ${OBJ}
-	${CC} -o ${NAME} ${OBJ}
+	${CC} -o $@ $^
 
-all: ${TARGET}
+all: ${TARGET} clean
 
 clean:
 	${RM} ${OBJ}
