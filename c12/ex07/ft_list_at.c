@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_list_at.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 22:44:19 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 22:44:27 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/23 12:26:36 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/23 12:26:37 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_list.h"
 
-unsigned int	ft_strlen(char *s)
+t_list	*ft_list_at(t_list *begin_list, unsigned int nbr)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (s[i])
+	while (begin_list)
+	{
+		if (i == nbr)
+			return (begin_list);
+		begin_list = begin_list->next;
 		i++;
-	return (i);
-}
-
-void	fstrcpy(char *dst, char *src)
-{
-	while (*src)
-		*dst++ = *src++;
-	*dst = *src;
-}
-
-char	*ft_strdup(char *src)
-{
-	char			*dst;
-	unsigned int	size;
-
-	size = ft_strlen(src) + 1;
-	dst = (char *) malloc(size);
-	if (!dst)
-		return (0);
-	fstrcpy(dst, src);
-	return (dst);
+	}
+	return (NULL);
 }

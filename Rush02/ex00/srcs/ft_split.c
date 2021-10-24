@@ -19,22 +19,12 @@ void	ft_strncpy(char *dst, char *src, int len)
 	*dst = '\0';
 }
 
-int	is_seperator(char c, char *charset)
+int	is_seperator(char s, char c)
 {
-	int	i;
-
-	if (!charset)
-		return (0);
-	i = -1;
-	while (charset[++i])
-	{
-		if (charset[i] == c)
-			return (1);
-	}
-	return (0);
+	return (c == s);
 }
 
-int	count_words(char *str, char *charset)
+int	count_words(char *str, char c)
 {
 	int	i;
 	int	words;
@@ -43,19 +33,19 @@ int	count_words(char *str, char *charset)
 	words = 0;
 	while (str[i])
 	{
-		if (is_seperator(str[i], charset))
+		if (is_seperator(str[i], c))
 		{
 			i++;
 			continue ;
 		}
 		words++;
-		while (str[i] && !is_seperator(str[i], charset))
+		while (str[i] && !is_seperator(str[i], c))
 			i++;
 	}
 	return (words);
 }
 
-char	**split_words(char *str, char *charset, char **dst)
+char	**split_words(char *str, char c, char **dst)
 {
 	int	i;
 	int	j;
@@ -65,12 +55,12 @@ char	**split_words(char *str, char *charset, char **dst)
 	j = 0;
 	while (str[j])
 	{
-		while (is_seperator(str[j], charset))
+		while (is_seperator(str[j], c))
 			j++;
 		size = 0;
 		if (!str[j])
 			break ;
-		while (str[j + size] && !is_seperator(str[j + size], charset))
+		while (str[j + size] && !is_seperator(str[j + size], c))
 			size++;
 		dst[i] = (char *) malloc(sizeof(char) * (size + 1));
 		if (!dst[i])
@@ -84,15 +74,15 @@ char	**split_words(char *str, char *charset, char **dst)
 	return (dst);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char *str, char c)
 {
 	char	**dst;
 
 	if (str == NULL)
 		return (NULL);
-	dst = (char **) malloc(sizeof(char *) * (count_words(str, charset) + 1));
+	dst = (char **) malloc(sizeof(char *) * (count_words(str, c) + 1));
 	if (!dst)
 		return (NULL);
-	dst[count_words(str, charset)] = 0;
-	return (split_words(str, charset, dst));
+	dst[count_words(str, c)] = 0;
+	return (split_words(str, c, dst));
 }

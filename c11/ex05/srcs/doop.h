@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   doop.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 22:44:19 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 22:44:27 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/22 22:37:11 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/22 22:37:13 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef DOOP_H
+# define DOOP_H
 
-unsigned int	ft_strlen(char *s)
-{
-	unsigned int	i;
+# include <unistd.h>
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+# define DIV_ERR "Stop : division by zero"
 
-void	fstrcpy(char *dst, char *src)
-{
-	while (*src)
-		*dst++ = *src++;
-	*dst = *src;
-}
+# define MOD_ERR "Stop : modulo by zero"
 
-char	*ft_strdup(char *src)
-{
-	char			*dst;
-	unsigned int	size;
+int		ft_atoi(char *str);
 
-	size = ft_strlen(src) + 1;
-	dst = (char *) malloc(size);
-	if (!dst)
-		return (0);
-	fstrcpy(dst, src);
-	return (dst);
-}
+int		add(int a, int b);
+int		sub(int a, int b);
+int		mul(int a, int b);
+int		div(int a, int b);
+int		mod(int a, int b);
+void	ft_putnbr(int n);
+void	f_print(char *str);
+#endif // !DOOP_H

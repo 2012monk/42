@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_count_if.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 22:44:19 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 22:44:27 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/22 22:04:11 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/22 22:04:12 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-unsigned int	ft_strlen(char *s)
+int	ft_count_if(char **tab, int length, int (*f)(char *))
 {
-	unsigned int	i;
+	int	i;
+	int	cnt;
 
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	fstrcpy(char *dst, char *src)
-{
-	while (*src)
-		*dst++ = *src++;
-	*dst = *src;
-}
-
-char	*ft_strdup(char *src)
-{
-	char			*dst;
-	unsigned int	size;
-
-	size = ft_strlen(src) + 1;
-	dst = (char *) malloc(size);
-	if (!dst)
-		return (0);
-	fstrcpy(dst, src);
-	return (dst);
+	cnt = 0;
+	if (!tab)
+		return (cnt);
+	while (i < length)
+	{
+		if (f(tab[i++]))
+			cnt++;
+	}
+	return (cnt);
 }

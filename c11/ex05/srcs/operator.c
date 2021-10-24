@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 22:44:19 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 22:44:27 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/22 22:43:58 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/22 22:44:02 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-unsigned int	ft_strlen(char *s)
+int	add(int a, int b)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	return (a + b);
 }
 
-void	fstrcpy(char *dst, char *src)
+int	sub(int a, int b)
 {
-	while (*src)
-		*dst++ = *src++;
-	*dst = *src;
+	return (a - b);
 }
 
-char	*ft_strdup(char *src)
+int	mul(int a, int b)
 {
-	char			*dst;
-	unsigned int	size;
+	return (a * b);
+}
 
-	size = ft_strlen(src) + 1;
-	dst = (char *) malloc(size);
-	if (!dst)
-		return (0);
-	fstrcpy(dst, src);
-	return (dst);
+int	div(int a, int b)
+{
+	return (a / b);
+}
+
+int	mod(int a, int b)
+{
+	return (a % b);
 }

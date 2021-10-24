@@ -1,43 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_list_push_back.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 22:44:19 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 22:44:27 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/23 12:09:54 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/23 12:09:55 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_list.h"
 
-unsigned int	ft_strlen(char *s)
+void	ft_list_push_back(t_list *begin_list, void *data)
 {
-	unsigned int	i;
+	t_list	*node;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	fstrcpy(char *dst, char *src)
-{
-	while (*src)
-		*dst++ = *src++;
-	*dst = *src;
-}
-
-char	*ft_strdup(char *src)
-{
-	char			*dst;
-	unsigned int	size;
-
-	size = ft_strlen(src) + 1;
-	dst = (char *) malloc(size);
-	if (!dst)
-		return (0);
-	fstrcpy(dst, src);
-	return (dst);
+	node = (t_list *) malloc(sizeof(t_list));
+	if (!node)
+		return ;
+	if (!begin_list)
+	{
+		*begin_list = node;
+		return ;
+	}
+	while (begin_list->next)
+		begin_list = begin_list->next;
+	begin_list->next = node;
 }

@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 22:44:19 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 22:44:27 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/22 22:45:52 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/22 22:45:54 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "unistd.h"
 
-unsigned int	ft_strlen(char *s)
+void	ft_putchar(char c)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	write(1, &c, 1);
 }
 
-void	fstrcpy(char *dst, char *src)
+void	ft_putnbr(int n)
 {
-	while (*src)
-		*dst++ = *src++;
-	*dst = *src;
-}
+	int	carry;
+	int	digit;
 
-char	*ft_strdup(char *src)
-{
-	char			*dst;
-	unsigned int	size;
-
-	size = ft_strlen(src) + 1;
-	dst = (char *) malloc(size);
-	if (!dst)
-		return (0);
-	fstrcpy(dst, src);
-	return (dst);
+	carry = n / 10;
+	digit = n % 10;
+	if (n < 0)
+	{
+		ft_putchar('-');
+		carry = -carry;
+		digit = -digit;
+	}
+	if (carry)
+		ft_putnbr(carry);
+	ft_putchar(digit + '0');
 }

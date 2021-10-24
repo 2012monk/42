@@ -1,43 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_advanced_sort_string_tab.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 22:44:19 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 22:44:27 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/22 23:16:28 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/22 23:16:28 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-unsigned int	ft_strlen(char *s)
+void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 {
-	unsigned int	i;
+	int		len;
+	int		i;
+	char	*tmp;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	fstrcpy(char *dst, char *src)
-{
-	while (*src)
-		*dst++ = *src++;
-	*dst = *src;
-}
-
-char	*ft_strdup(char *src)
-{
-	char			*dst;
-	unsigned int	size;
-
-	size = ft_strlen(src) + 1;
-	dst = (char *) malloc(size);
-	if (!dst)
-		return (0);
-	fstrcpy(dst, src);
-	return (dst);
+	len = 0;
+	while (tab[len])
+		len++;
+	i = -1;
+	while (++i + 1 < len)
+	{
+		if (cmp(tab[i], tab[i + 1]) > 0)
+		{
+			tmp = tab[i];
+			tab[i] = tab[i + 1];
+			tab[i + 1] = tmp;
+			i = -1;
+		}
+	}
 }
