@@ -1,6 +1,6 @@
-NAME = ft_displayfile
+NAME = ft_display_file
 
-SRCS = ./srcs/ft_displayfile.c
+SRCS = ./srcs/ft_display_file.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -19,9 +19,11 @@ ${NAME}: ${OBJS}
 all: ${NAME}
 
 clean:
-	RM ${OBJS} 
+	${RM} ${OBJS} 
 
-fclean: 
-	RM ${NAME}
+fclean: clean 
+	${RM} ${NAME}
 
-.PHONY: all clean fclean
+re: fclean clean
+
+.PHONY: all clean fclean re

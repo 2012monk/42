@@ -23,7 +23,9 @@ all: ${NAME}
 clean:
 	${RM} ${OBJS} 
 
-fclean: 
+fclean: clean 
 	${RM} ${NAME}
 
-.PHONY: all clean fclean e
+re: fclean all
+
+.PHONY: all clean fclean re 

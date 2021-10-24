@@ -31,6 +31,26 @@ int	add_elem(char **words, t_map **list, int idx)
 	list[idx] = creat_elem(strip(words[0]), lstrip(words[1]));
 	if (!list[idx] || !list[idx]->key || !list[idx]->value)
 		return (-1);
+	if (ft_strlen(list[idx]->key) <= 3)
+		list[idx]->num = ft_atoi(list[idx]->key);
+	else
+	{
+		if (validate_digit(list[idx]->key) != -1)
+			list[idx]->digit = ft_strlen(list[idx]->key) / 3;
+	}
 	free_words(words);
 	return (1);
+}
+
+char	*find_digit(int digit)
+{
+	int	i;
+
+	i = -1;
+	while (g_digit_map[++i])
+	{
+		if (g_digit_map[i]->digit == digit)
+			return (g_digit_map[i]->value);
+	}
+	return (NULL);
 }

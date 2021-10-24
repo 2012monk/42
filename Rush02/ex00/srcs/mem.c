@@ -37,7 +37,6 @@ void	free_list(t_map **list)
 		return ;
 	while (list[++i])
 	{
-		// printf("free mem %d==%s==%s==\n", i, list[i]->key, list[i]->value);
 		free(list[i]->key);
 		free(list[i]->value);
 		free(list[i]);
@@ -53,9 +52,13 @@ void	free_words(char **strs)
 		return ;
 	i = 0;
 	while (strs[i])
-	{
-		// printf("%smem freed ========\n", strs[i]);
 		free(strs[i++]);
-	}
 	free(strs);
+}
+
+void	free_all(void)
+{
+	free_list(g_number_map);
+	free_list(g_digit_map);
+	free_words(g_unique_map);
 }

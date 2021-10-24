@@ -62,5 +62,14 @@ t_map	*creat_elem(char *key, char *val);
 int		add_elem(char **words, t_map **list, int idx);
 int		validate_key(char *key);
 int		validate_map(char **words);
-int fill_char_map(void);
-#endif // !RUSH02_H
+int		fill_char_map(void);
+int		validate_digit(char *digit);
+char	*find_digit(int digit);
+void	f_print(char *str);
+char	*ft_malloc_map(char *str1, char *str2, char *str3);
+char	*ft_strcat(char *dest, char *src);
+int		validate_input(char *str);
+int		validate_elem(int digit, int offset, char *set, char *str);
+void	clear_set(char *set);
+void	free_all(void);
+#endif 

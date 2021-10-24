@@ -18,12 +18,14 @@ int	do_print(char *path)
 	int		size;
 	int		fd;
 
-	fd = open(path, O_RDWR);
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (-1);
 	size = read(fd, buf, BUF_SIZE - 1);
 	while (size)
 	{
+		if (errno)
+			return (-1);
 		buf[size] = '\0';
 		write(F_STDOUT, buf, size);
 		size = read(fd, buf, BUF_SIZE - 1);

@@ -2,13 +2,11 @@ NAME = ft_cat
 
 DIR = ./srcs/
 
-INC = ./includes/
-
-SRC = ft_cat.c do_cat.c
-
-SRCS = ${addprefix ${DIR}, ${SRC}}
+SRCS = ${wildcard ./srcs/*.c}
 
 OBJS = ${SRCS:.c=.o}
+
+INC = ./includes/
 
 CC = gcc
 
@@ -27,7 +25,9 @@ all: ${NAME}
 clean:
 	${RM} ${OBJS} 
 
-fclean: clean 
-	${RM} $@
+fclean: clean
+	${RM} ${NAME}
 
-.PHONY: all clean fclean
+re: fclean all
+
+.PHONY: all clean fclean re 

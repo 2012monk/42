@@ -35,3 +35,58 @@ int	validate_map(char **words)
 		return (-1);
 	return (1);
 }
+
+int	validate_digit(char *digit)
+{
+	if (*digit++ != '1')
+		return (-1);
+	while (*digit)
+	{
+		if (*digit++ != '0')
+			return (-1);
+	}
+	return (1);
+}
+
+int	validate_input(char *str)
+{
+	int	i;
+	
+	i = 0;
+	if (ft_strlen(str) > 1 && str[0] == '0')
+		return (-1);
+	while (str[i] != '\0')
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (-1);
+		i++;
+	}
+	return (1);
+}
+
+int	validate_elem(int digit, int offset, char *set, char *str)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	if (digit == 1 && str[0] == '0')
+	{
+		if (g_unique_map[0] == NULL)
+			return (-1);
+		return (1);
+	}
+	while (digit--)
+	{
+		clear_set(set);
+		i = offset;
+		if (offset != 0)
+			offset = 0;
+		f_memcpy(&set[i], &str[j], 3 - i);
+		if (!g_unique_map[ft_atoi(set)]
+			|| (digit > 0 && !find_digit(digit)))
+			return (-1);
+		j += 3 - i;
+	}
+	return (1);
+}

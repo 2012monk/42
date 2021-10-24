@@ -68,7 +68,7 @@ void	join_file(char **av, int ac, t_node *root)
 	j = -1;
 	while (++j < ac)
 	{
-		fd = open(av[j], O_RDWR);
+		fd = open(av[j], O_RDONLY);
 		if (fd < 0)
 			cur = add_err(av[j], errno, cur);
 		if (fd < 0 && (g_ever_dir || j != ac - 1 || g_total))

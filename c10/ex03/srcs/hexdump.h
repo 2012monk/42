@@ -19,7 +19,6 @@
 # include <libgen.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <stdio.h>
 
 # define F_STDIN 0
 
@@ -62,4 +61,5 @@ t_node	*data_shift(t_node *cur, char buf[17], int size);
 void	ft_hexdump(char buf[], int end);
 void	throw_err(char *prog, char *path);
 void	free_node(t_node *node);
+int		is_directory(char *name);
 #endif

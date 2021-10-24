@@ -14,7 +14,7 @@
 
 t_node	*add_err(char *name, int err, t_node *cur)
 {
-	g_ever_dir |= errno == EISDIR;
+	g_ever_dir |= err == EISDIR;
 	errno = 0;
 	cur->next = (t_node *) malloc(sizeof(t_node));
 	cur->err = err;

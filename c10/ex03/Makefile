@@ -4,8 +4,6 @@ DIR = ./srcs/
 
 SRCS = ${wildcard ./srcs/*.c}
 
-# SRCS = ${addprefix ${DIR}, ${SRC}}
-
 OBJS = ${SRCS:.c=.o}
 
 CC = gcc
@@ -27,5 +25,7 @@ clean:
 
 fclean: clean 
 	${RM} ${NAME}
+
+re: fclean all
 
 .PHONY: all clean fclean e

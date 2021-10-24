@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_advanced_sort_string_tab.c                      :+:      :+:    :+:   */
+/*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 23:16:28 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/22 23:16:28 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/23 11:55:14 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/23 11:55:15 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
-{
-	int		len;
-	int		i;
-	char	*tmp;
+#ifndef FT_LIST_H
+# define FT_LIST_H
 
-	len = 0;
-	while (tab[len])
-		len++;
-	i = -1;
-	while (++i + 1 < len)
-	{
-		if (cmp(tab[i], tab[i + 1]) > 0)
-		{
-			tmp = tab[i];
-			tab[i] = tab[i + 1];
-			tab[i + 1] = tmp;
-			i = -1;
-		}
-	}
-}
+typedef struct s_list
+{
+	struct s_list	*next;
+	void			*data;
+}	t_list;
+
+#endif // !FT_LIST_H

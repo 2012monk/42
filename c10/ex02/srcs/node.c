@@ -11,38 +11,10 @@
 /* ************************************************************************** */
 #include "ft_tail.h"
 
-int	batch_file(int fd, char buf[], int size)
+int	fill_node(t_node *root, int fd)
 {
-	if (fd < 0)
-		return (-1);
-	return (read(fd, buf, size));
-}
+	t_node	*cur;
 
-int	is_eof(char *buf)
-{
-	while (*buf)
-	{
-		if (*buf++ == EOF)
-			return (1);
-	}
-	return (0);
-	
-}
-
-void	count_line(t_node *node)
-{
-	int	i;
-
-	if (!node || !node->size)
-		return ;
-	i = -1;
-	while (node->data[++i])
-		node->line += node->data[i] == '\n';
-}
-
-int fill_node(t_node *root, int fd)
-{
-	t_node  *cur;
 	cur = (t_node *) malloc(sizeof(t_node));
 	if (!cur)
 		return (-1);
@@ -66,9 +38,9 @@ int fill_node(t_node *root, int fd)
 	return (1);
 }
 
-t_node  *init_node(int fd)
+t_node	*init_node(int fd)
 {
-	t_node  *root;
+	t_node	*root;
 
 	if (fd < 0)
 		return (NULL);
@@ -86,7 +58,7 @@ t_node  *init_node(int fd)
 
 void	free_all(t_node *node)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	while (!node)
 	{

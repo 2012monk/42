@@ -22,7 +22,7 @@ clean:
 	${RM} ${OBJ}
 
 fclean: clean
-	${RM} ${NAME}
+	${RM} ${TARGET}
 
 re: fclean all
 

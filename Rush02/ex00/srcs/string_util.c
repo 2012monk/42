@@ -12,6 +12,14 @@
 
 #include "rush02.h"
 
+void	f_print(char *str)
+{
+	if (!str)
+		return ;
+	while (*str)
+		write(1, str++, 1);
+}
+
 int	ft_strlen(char *str)
 {
 	int	i;
