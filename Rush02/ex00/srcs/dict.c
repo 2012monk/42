@@ -58,13 +58,13 @@ int	split_map(t_map **list, int size)
 	{
 		if (ft_strlen(list[i]->key) > 3)
 		{
-			list[i]->num = ft_atoi(list[i]->key);
+			list[i]->num = (*list[i]->key - '0') / 3;
+			list[i]->digit = ft_strlen(list[i]->key);
 			g_digit_map[digits++] = list[i];
 		}
 		else
 		{
-			list[i]->digit = ft_strlen(list[i]->key);
-			list[i]->num = list[i]->key - '0';
+			list[i]->num = ft_atoi(list[i]->key);
 			g_number_map[numbers++] = list[i];
 		}
 	}
@@ -110,35 +110,49 @@ int	fill_map(char *file)
 	if (size == -1)
 		return (-1);
 	free_words(words);
+	// free(list);
 	split_map(list, size);
 	return (1);
 }
 
-
-int main(void)
+int	init(char *name)
 {
-	int	i = 0;
-	if (fill_map("numbers.dict") == -1)
-	{
-		printf("%s", "DICT ERROR\n");
-		return (1);
-	}
+	if (fill_map(name) == -1)
+		return (-1);
+	if (fill_char_map() == -1)
+		return (-1);
+	return (1);
+}
+
+// int	main()
+// {
+// 	init("numbers.dict");
+// }
+
+// int main(void)
+// {
+// 	int	i = 0;
+// 	if (fill_map("numbers.dict") == -1)
+// 	{
+// 		printf("%s", "DICT ERROR\n");
+// 		return (1);
+// 	}
 	
 
-	printf("%s %d\n", "init", g_number_map == NULL);
-	if (!g_number_map)
-	{
-		printf("%s", "ERROR\n");
-		return 1;
-	}
-	printf("%s . %s\n", g_number_map[1]->key, g_number_map[1]->value);
-	while (g_number_map[i] != NULL)
-	{
-		printf("%d\n",i);
-		printf("%d .  NULL ? %d %s %s\n",i, g_number_map[i] == NULL, g_number_map[i]->key, g_number_map[i]->value);
-		i++;
-	}
-	i = -1;
-	while (g_digit_map[++i])
-		printf("%d ===%s>>%s\n", i, g_digit_map[i]->key, g_digit_map[i]->value);
-}
+// 	printf("%s %d\n", "init", g_number_map == NULL);
+// 	if (!g_number_map)
+// 	{
+// 		printf("%s", "ERROR\n");
+// 		return 1;
+// 	}
+// 	printf("%s . %s\n", g_number_map[1]->key, g_number_map[1]->value);
+// 	while (g_number_map[i] != NULL)
+// 	{
+// 		printf("%d\n",i);
+// 		printf("%d  %d.  convert ? %d===%s==%s===\n",i, ft_atoi(g_number_map[i]->key),g_number_map[i]->num, g_number_map[i]->key, g_number_map[i]->value);
+// 		i++;
+// 	}
+// 	i = -1;
+// 	while (g_digit_map[++i])
+// 		printf("%d ===%s>>%s\n", i, g_digit_map[i]->key, g_digit_map[i]->value);
+// }

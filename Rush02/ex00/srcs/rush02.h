@@ -62,4 +62,5 @@ t_map	*creat_elem(char *key, char *val);
 int		add_elem(char **words, t_map **list, int idx);
 int		validate_key(char *key);
 int		validate_map(char **words);
+int fill_char_map(void);
 #endif // !RUSH02_H
