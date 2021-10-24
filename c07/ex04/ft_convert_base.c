@@ -45,8 +45,7 @@ int	ft_atoi_base(unsigned char *num, int radix, int map[])
 
 	sign = 1;
 	i = 0;
-	while (num[i] == ' ' || num[i] == '\n' || num[i] == '\t'
-		|| num[i] == '\v' || num[i] == '\f' || num[i] == '\r')
+	while (num[i] == ' ' || (9 <= num[i] && num[i] <= 13))
 		i++;
 	while (num[i] == '-' || num[i] == '+')
 	{
