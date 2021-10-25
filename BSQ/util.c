@@ -1,43 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 22:44:19 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 22:44:27 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/25 22:06:59 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/25 22:07:05 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "bsq.h"
 
-unsigned int	ft_strlen(char *s)
+int	max(int a, int b)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (a > b)
+		return (a);
+	return (b);
 }
 
-void	fstrcpy(char *dst, char *src)
+int	min(int a, int b, int c)
 {
-	while (*src)
-		*dst++ = *src++;
-	*dst = *src;
+	if (a > b)
+		a = b;
+	if (a > c)
+		a = c;
+	return (a);
 }
 
-char	*ft_strdup(char *src)
+void	print_board(t_board *map)
 {
-	char			*dst;
-	unsigned int	size;
+	int	i;
 
-	size = ft_strlen(src) + 1;
-	dst = (char *) malloc(size);
-	if (!dst)
-		return (0);
-	fstrcpy(dst, src);
-	return (dst);
+	i = -1;
+	while (++i < map->height)
+	{
+		write(1, map->board[i], map->width);
+		write(1, "\n", 1);
+	}
+}
+
+void	throw_err(void)
+{
+	write(2, "map error\n", 11);
 }

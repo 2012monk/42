@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: seounlee <seounlee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 18:30:36 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 18:30:37 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/10 18:02:54 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/10 18:03:32 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_tail.h"
-
-void	print_str(char *str, int size)
+int	ft_strlen(char *str)
 {
-	write(1, str, size);
-}
+	int	length;
 
-void	put_str(int fd, char *msg)
-{
-	while (*msg)
-		write(fd, msg++, 1);
-}
-
-void	f_print(char *msg)
-{
-	put_str(F_STDOUT, msg);
+	length = 0;
+	while ((*str) != '\0')
+	{
+		str++;
+		length++;
+	}
+	return (length);
 }

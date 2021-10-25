@@ -14,7 +14,7 @@
 
 void	throw_err(char *prog, char *path)
 {
-	if (errno == 0)
+	if (errno == 0 || errno == EISDIR)
 		return ;
 	put_str(F_STDERR, basename(prog));
 	put_str(F_STDERR, ": ");

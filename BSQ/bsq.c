@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   bsq.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 18:30:36 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 18:30:37 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/25 21:26:19 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/25 21:26:19 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_tail.h"
+#include "bsq.h"
 
-void	print_str(char *str, int size)
+void	solve_maps(int ac, char **av)
 {
-	write(1, str, size);
+	int		i;
+	t_board	*map;
+
+	i = -1;
+	while (++i < ac)
+	{
+		map = parse_map(av[i]);
+		if (!map)
+		{
+			throw_err();
+			continue ;
+		}
+		solve(map);
+	}
 }
+/**
+ * STDIN 처리 피요함
+ * */
 
-void	put_str(int fd, char *msg)
+int	main(int ac, char **av)
 {
-	while (*msg)
-		write(fd, msg++, 1);
-}
-
-void	f_print(char *msg)
-{
-	put_str(F_STDOUT, msg);
+	solve_maps(ac - 1, &av[1]);
+	return (0);
 }

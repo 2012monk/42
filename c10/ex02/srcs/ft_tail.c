@@ -5,107 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 14:36:57 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 14:36:59 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/25 10:59:53 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/25 10:59:54 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <libgen.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include "ft_tail.h"
-#define BUF_SIZE 1024
 
-int	is_directory(char *file)
+int	print_files(int ac, char *av[], char *prog, int size)
 {
-	int	fd;
+	int		i;
+	int		fd;
+	char	*str;
 
-	fd = open(file, O_DIRECTORY);
-	if (fd < 0)
-		return (0);
-	close(fd);
+	str = (char *) malloc(sizeof(char) * (size + 1));
+	if (!str)
+		return (-1);
+	str[size] = '\0';
+	i = -1;
+	while (++i < ac)
+	{
+		fd = open(av[i], O_RDONLY);
+		if (fd < 0)
+		{
+			throw_err(prog, av[i]);
+			continue ;
+		}
+		if (ac > 1 && !errno)
+			print_file_name(av[i]);
+		print_buffer(size, str, fd);
+		if (ac > 1 && i < ac - 1)
+			write(1, "\n", 1);
+	}
 	return (1);
 }
 
-int	get_offset(char *option, char *num)
+int	main(int ac, char *av[])
 {
-	int	ret;
-	int	i;
-
-	ret = 0;
-	i = 0;
-	if (option[0] != '-' || option[1] != 'c')
-		return (-1);
-	while ((9 <= num[i] && num[i] <= 13)
-		|| num[i] == ' ')
-		i++;
-	if (!num[i])
-		return (-1);
-	while (num[i])
-	{
-		if (!('0' <= num[i] && num[i] <= '9'))
-			return (-1);
-		ret = (ret * 10) + num[i] - '0';
-		i++;
-	}
-	return (ret);
-}
-
-void	print_file_name(char *name)
-{
-	f_print("==> ");
-	f_print(name);
-	f_print(" <==\n");
-}
-
-void	print_all(int ac, char **av, int bytes)
-{
-	int		i;
-	t_node	*root;
-
-	i = 2;
-	while (++i < ac)
-	{
-		if (!is_directory(av[i]))
-		{
-			root = init_node(open(av[i], O_RDONLY));
-			if (!root)
-			{
-				throw_err(av[0], av[i]);
-				continue ;
-			}
-		}
-		if (ac > 4)
-			print_file_name(av[i]);
-		if (!is_directory(av[i]))
-			print_by_size(root, bytes);
-		if (ac > 4 && i < ac - 1)
-			f_print("\n");
-		free_all(root);
-	}
-}
-
-int	main(int ac, char **av)
-{
-	t_node	*root;
-	int		bytes;
-
-	bytes = get_offset(av[1], av[2]);
-	if (bytes == -1)
+	if (ac < 3)
+		return (0);
+	if (av[1][0] != '-' || av[1][1] != 'c')
+		return (1);
+	if (!is_valid_number(av[2]))
 	{
 		errno = -1;
 		throw_err(av[0], av[2]);
 		return (1);
 	}
 	if (ac == 3)
-	{
-		root = init_node(0);
-		print_by_size(root, bytes);
-		return (0);
-	}
-	print_all(ac, av, bytes);
+		ft_echo(ft_atoi(av[2]));
+	else
+		print_files(ac - 3, &av[3], av[0], ft_atoi(av[2]));
 	return (0);
 }

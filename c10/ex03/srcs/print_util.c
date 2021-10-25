@@ -43,7 +43,7 @@ void	ft_hexdump(char buf[], int end)
 {
 	int			i;
 
-	print_dec_to_hex(g_cur_size, 7 + g_option);
+	print_dec_to_hex(g_size, 7 + g_option);
 	if (g_option)
 		f_print(" ");
 	f_print(" ");

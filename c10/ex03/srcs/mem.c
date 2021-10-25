@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   mem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 18:30:36 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 18:30:37 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/24 02:13:27 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/24 02:13:28 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_tail.h"
+#include "hexdump.h"
 
-void	print_str(char *str, int size)
+void	f_memcpy(void *dst, void *src, unsigned int len)
 {
-	write(1, str, size);
-}
+	char			*to;
+	char			*from;
+	unsigned int	i;
 
-void	put_str(int fd, char *msg)
-{
-	while (*msg)
-		write(fd, msg++, 1);
-}
-
-void	f_print(char *msg)
-{
-	put_str(F_STDOUT, msg);
+	to = (char *) dst;
+	from = (char *) src;
+	i = 0;
+	while (i < len)
+	{
+		to[i] = from[i];
+		i++;
+	}
 }

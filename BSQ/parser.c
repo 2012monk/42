@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hex_util.c                                         :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 20:41:43 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/22 20:41:43 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/25 22:07:49 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/25 22:07:50 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hexdump.h"
+#include "bsq.h"
 
-void	put_str(int fd, char *msg)
+t_board	*parse_map(char *file)
 {
-	while (*msg)
-		write(fd, msg++, 1);
-}
+	t_board	*board;
+	char	**b;
+	int		i;
 
-void	f_print(char *msg)
-{
-	put_str(F_STDOUT, msg);
-}
-
-void	throw_err_custom(char *prog, char *path, int err)
-{
-	if (err == 0)
-		return ;
-	put_str(F_STDERR, basename(prog));
-	put_str(F_STDERR, ": ");
-	put_str(F_STDERR, path);
-	put_str(F_STDERR, ": ");
-	put_str(F_STDERR, strerror(err));
-	put_str(F_STDERR, "\n");
+	board = malloc(sizeof(t_board));
+	b = get_lines(file);
+	i = 0;
+	while (b[0][i])
+		i++;
+	board->fill = b[0][i - 1];
+	board->obstacle = b[0][i - 2];
+	board->empty = b[0][i - 3];
+	b[0][i - 3] = '\0';
+	board->height = ft_atoi(b[0]);
+	board->width = ft_strlen(b[1]);
+	board->board = b + 1;
+	return (board);
 }

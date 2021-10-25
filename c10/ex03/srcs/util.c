@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   hex_util.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 18:30:36 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/20 18:30:37 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/22 20:41:43 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/22 20:41:43 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_tail.h"
-
-void	print_str(char *str, int size)
-{
-	write(1, str, size);
-}
+#include "hexdump.h"
 
 void	put_str(int fd, char *msg)
 {
@@ -26,4 +21,17 @@ void	put_str(int fd, char *msg)
 void	f_print(char *msg)
 {
 	put_str(F_STDOUT, msg);
+}
+
+void	throw_err(char *prog, char *path)
+{
+	if (errno == 0)
+		return ;
+	put_str(F_STDERR, basename(prog));
+	put_str(F_STDERR, ": ");
+	put_str(F_STDERR, path);
+	put_str(F_STDERR, ": ");
+	put_str(F_STDERR, strerror(errno));
+	put_str(F_STDERR, "\n");
+	errno = 0;
 }
