@@ -43,5 +43,5 @@ int		ft_atoi(char *str);
 int		is_valid_number(char *str);
 int		read_bytes(int size, int fd, char *buf);
 int		print_buffer(int size, char *buf, int fd);
-void	print_file_name(char *name);
+void	print_file_name(char *name, int is_line);
 #endif

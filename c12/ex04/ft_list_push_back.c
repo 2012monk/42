@@ -12,19 +12,27 @@
 
 #include "ft_list.h"
 
-void	ft_list_push_back(t_list *begin_list, void *data)
+t_list	*ft_creat(void *data)
 {
 	t_list	*node;
 
 	node = (t_list *) malloc(sizeof(t_list));
 	if (!node)
-		return ;
-	if (!begin_list)
+		return (NULL);
+	node->data = data;
+	return (node);
+}
+void	ft_list_push_back(t_list **begin_list, void *data)
+{
+	t_list	*head;
+
+	head = *begin_list;
+	if (!*begin_list)
 	{
-		*begin_list = node;
+		*begin_list = ft_creat(data);
 		return ;
 	}
-	while (begin_list->next)
-		begin_list = begin_list->next;
-	begin_list->next = node;
+	while (head->next)
+		head = head->next;
+	head->next = ft_creat_elem(data);
 }

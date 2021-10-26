@@ -85,7 +85,7 @@ void	calc_map(t_board *map, int **bd)
 			}
 		}
 	}
-	debug(map, bd);
+	// debug(map, bd);
 	fill_board(bd, map, x, y);
 }
 
@@ -108,5 +108,6 @@ void	solve(t_board *map)
 			exit(1);
 	}
 	calc_map(map, board);
+	// int ** 해제
 	print_board(map);
 }

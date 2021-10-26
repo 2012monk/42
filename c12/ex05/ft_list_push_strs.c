@@ -12,22 +12,40 @@
 
 #include "ft_list.h"
 
+t_list	*ft_creat(void *data)
+{
+	t_list	*node;
+
+	node = (t_list *) malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->data = data;
+	return (node);
+}
+
+void	ft_list_push_front(t_list **begin_list, void *data)
+{
+	t_list	*node;
+
+	node = ft_creat(data);
+	if (!node)
+		return ;
+	if (begin_list[0])
+		node->next = begin_list[0];
+	begin_list[0] = node;
+}
+
 t_list	*ft_list_push_strs(int size, char **strs)
 {
 	t_list	*root;
-	t_list	*tmp;
 
 	root = (t_list *) malloc(sizeof(t_list));
 	if (!root)
 		return (NULL);
-	while (size)
+	root->data = *strs++;
+	while (--size)
 	{
-		tmp = ft_creat_elem(*strs);
-		if (!tmp)
-			return (NULL);
-		tmp->next = root;
-		root = tmp;
-		size--;
+		ft_list_push_front(&root, *strs++);
 	}
 	return (root);
 }

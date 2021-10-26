@@ -26,17 +26,18 @@ int	print_files(int ac, char *av[], char *prog, int size)
 	while (++i < ac)
 	{
 		fd = open(av[i], O_RDONLY);
-		if (fd < 0)
+		if (fd < 0 || errno)
 		{
 			throw_err(prog, av[i]);
 			continue ;
 		}
 		if (ac > 1 && !errno)
-			print_file_name(av[i]);
+			print_file_name(av[i], ac > 1 && i > 0);
 		print_buffer(size, str, fd);
-		if (ac > 1 && i < ac - 1)
-			write(1, "\n", 1);
+		if (errno)
+			throw_err(prog, av[i]);
 	}
+	free(str);
 	return (1);
 }
 

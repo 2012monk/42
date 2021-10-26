@@ -30,30 +30,3 @@ void	ft_list_reverse(t_list **begin_list)
 	begin = *begin_list;
 	*begin_list = rec_reverse(begin, NULL);
 }
-#include <stdlib.h>
-#include <stdio.h>
-int	main()
-{
-	t_list **list;
-	t_list *tmp;
-	char	*m[] = {"1","2","3","4","5"};
-
-	list = malloc(sizeof(t_list *));
-	*list = malloc(sizeof(t_list));
-	tmp = *list;
-	tmp->data = m[0];
-	for (int i=1;i<5;i++)
-	{
-		tmp->next = malloc(sizeof(t_list));
-		tmp = tmp->next;
-		tmp->data = m[i];
-	}
-	ft_list_reverse(list);
-	tmp = *list;
-	while (tmp)
-	{
-		printf("%s\n", tmp->data);
-		tmp = tmp ->next;
-	}
-	
-}

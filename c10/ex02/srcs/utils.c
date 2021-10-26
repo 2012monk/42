@@ -47,6 +47,8 @@ int	read_bytes(int size, int fd, char *buf)
 	{
 		if (!size)
 			continue ;
+		if (buf[i] == -1)
+			break ;
 		i = (i + 1) % size;
 		if (i == head)
 			head = (head + 1) % size;
@@ -66,7 +68,7 @@ int	print_buffer(int size, char *buf, int fd)
 	int	cnt;
 
 	if (fd < 0 || errno == EISDIR)
-		return (1);
+		return (0);
 	i = -1;
 	cnt = size;
 	while (++i < size)
@@ -76,15 +78,18 @@ int	print_buffer(int size, char *buf, int fd)
 		return (-1);
 	while (size && cnt-- && buf[i])
 	{
+		if (errno)
+			return (0);
 		write(1, &buf[i], 1);
-		i++;
-		i %= size;
+		i = (i + 1) % size;
 	}
 	return (1);
 }
 
-void	print_file_name(char *name)
+void	print_file_name(char *name, int is_line)
 {
+	if (is_line)
+		f_print("\n");
 	f_print("==> ");
 	f_print(name);
 	f_print(" <==\n");

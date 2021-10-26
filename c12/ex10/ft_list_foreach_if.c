@@ -9,8 +9,10 @@
 /*   Updated: 2021/10/24 17:14:12 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_list.h"
-void	ft_list_foreach_if(t_list *begin_list, void (*f)(void *), 
+
+void	ft_list_foreach_if(t_list *begin_list, void (*f)(void *),
 	void *data_ref, int (*cmp)())
 {
 	if (!begin_list)

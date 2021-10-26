@@ -1,0 +1,15 @@
+#include "ft_list.h"
+t_list *ft_list_push_strs(int size, t_list *list);
+#include <stdio.h>
+int main()
+{
+	char *l[] = {"1","2","#"};
+	t_list *r;
+
+	r = ft_list_push_strs(3, l);
+	while (r)
+	{
+		printf("%s\n", r->data);
+		r = r->next;
+	}
+}
