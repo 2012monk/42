@@ -21,6 +21,8 @@
 # include <unistd.h>
 # include <stdio.h>
 
+# define BUF_SIZE 1048576
+
 typedef struct s_board
 {
 	char	**board;
@@ -31,16 +33,25 @@ typedef struct s_board
 	char	fill;
 }	t_board;
 
-int		ft_atoi(char *str);
-char	**get_lines(char *file);
-char	**ft_split(char *str, char c);
-int		count_arr(char **strs);
 int		ft_strlen(char *str);
-t_board	*parse_map(char *file);
 int		max(int a, int b);
 void	print_board(t_board *map);
 void	throw_err(void);
 void	solve(t_board *map);
-t_board	*parse_map(char *file);
 int		min(int a, int b, int c);
+int		count_size(char *argv);
+char	*read_map_file(char *argv);
+int		transfer_file(char *argv, t_board *board_info, int i);
+int		transfer_file_stdin(char *buf, t_board *board_info, int i);
+int		into_board(char *buf, t_board *board_info, int idx, int i);
+int		into_board_check(char *buf, t_board *board_info, int idx);
+int		ft_atoi_ht(char *buf, int i);
+int		redun_check(t_board *board_info);
+int		width_height(char *buf, t_board *board_info, int i, int j);
+int		first_line(char *buf, t_board *board_info);
+char	*parse_stdin(void);
+void	free_map(t_board *map);
+void	free_board(int **board, int height);
+
+void	debug(t_board *map, int **bd);
 #endif // !BSQ_H

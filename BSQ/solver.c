@@ -12,17 +12,6 @@
 
 #include "bsq.h"
 
-void	debug(t_board *map, int **bd)
-{
-	for (int i =0;i<map->height; i++){
-		for (int j=0;j < map->width; j++){
-			printf("%d", bd[i][j]);
-		}
-		printf("%s", "\n");
-	}
-	printf("%s", "\n");
-}
-
 void	init_board(t_board *out, int **board)
 {
 	int	i;
@@ -59,25 +48,22 @@ void	fill_board(int **board, t_board *map, int i, int j)
 	}
 }
 
-void	calc_map(t_board *map, int **bd)
+void	calc_map(t_board *map, int **bd, int x, int y)
 {
 	int	i;
 	int	j;
-	int	x;
-	int	y;
 
 	init_board(map, bd);
-	i = 0;
-	x = 0;
-	y = 0;
+	i = -1;
 	while (++i < map->height)
 	{
-		j = 0;
+		j = -1;
 		while (++j < map->width)
 		{
 			if (bd[i][j] == 0)
 				continue ;
-			bd[i][j] += min(bd[i][j - 1], bd[i - 1][j], bd[i - 1][j - 1]);
+			if (i > 0 && j > 0)
+				bd[i][j] += min(bd[i][j - 1], bd[i - 1][j], bd[i - 1][j - 1]);
 			if (bd[x][y] < bd[i][j])
 			{
 				x = i;
@@ -85,7 +71,6 @@ void	calc_map(t_board *map, int **bd)
 			}
 		}
 	}
-	// debug(map, bd);
 	fill_board(bd, map, x, y);
 }
 
@@ -94,6 +79,8 @@ void	solve(t_board *map)
 	int	**board;
 	int	i;
 
+	if (!map)
+		return ;
 	board = (int **) malloc(sizeof(int *) * map->height);
 	if (!board)
 	{
@@ -107,7 +94,7 @@ void	solve(t_board *map)
 		if (!board[i])
 			exit(1);
 	}
-	calc_map(map, board);
-	// int ** 해제
+	calc_map(map, board, 0, 0);
 	print_board(map);
+	free_board(board, map->height);
 }
