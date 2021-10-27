@@ -22,6 +22,7 @@ t_list	*ft_creat(void *data)
 	node->data = data;
 	return (node);
 }
+
 void	ft_list_push_back(t_list **begin_list, void *data)
 {
 	t_list	*head;
