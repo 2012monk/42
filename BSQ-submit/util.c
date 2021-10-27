@@ -1,53 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem.c                                              :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seounlee <seounlee@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 12:14:49 by seounlee          #+#    #+#             */
-/*   Updated: 2021/10/27 12:14:50 by seounlee         ###   ########.fr       */
+/*   Created: 2021/10/25 22:06:59 by seounlee          #+#    #+#             */
+/*   Updated: 2021/10/25 22:07:05 by seounlee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-void	free_map(t_board *map)
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+int	min(int a, int b, int c)
+{
+	if (a > b)
+		a = b;
+	if (a > c)
+		a = c;
+	return (a);
+}
+
+void	print_board(t_board *map)
 {
 	int	i;
 
 	i = -1;
-	if (!map->board)
-		return ;
-	while (map->board[++i])
+	while (++i < map->height)
 	{
-		free(map->board[i]);
-		map->board[i] = NULL;
+		write(1, map->board[i], map->width);
+		write(1, "\n", 1);
 	}
-	free(map->board);
-	map->board = 0;
 }
 
-void	free_board(int **board, int height)
+void	throw_err(void)
 {
-	int	i;
-
-	if (!board)
-		return ;
-	i = -1;
-	while (++i < height)
-	{
-		if (board[i])
-			free(board[i]);
-		board[i] = NULL;
-	}
-	free(board);
-	board = NULL;
-}
-
-void	free_all(t_board *map)
-{
-	free_map(map);
-	if (map)
-		free(map);
+	write(2, "map error\n", 11);
 }

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-rm -rf set
-mkdir set
+rm -rf set5
+mkdir set5
 
-for i in `seq 1 10`;
+for i in `seq 20 30`;
 do
-        ./grid_generator.perl 10 20 10 > set/grid_$i
+        ./grid_generator.perl 5 7 2 > set/grid_$i
 done
