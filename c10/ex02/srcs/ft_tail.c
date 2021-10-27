@@ -12,7 +12,7 @@
 
 #include "ft_tail.h"
 
-int	print_files(int ac, char *av[], char *prog, int size)
+void	print_files(int ac, char *av[], char *prog, int size)
 {
 	int		i;
 	int		fd;
@@ -20,7 +20,7 @@ int	print_files(int ac, char *av[], char *prog, int size)
 
 	str = (char *) malloc(sizeof(char) * (size + 1));
 	if (!str)
-		return (-1);
+		return ;
 	str[size] = '\0';
 	i = -1;
 	while (++i < ac)
@@ -32,13 +32,12 @@ int	print_files(int ac, char *av[], char *prog, int size)
 			continue ;
 		}
 		if (ac > 1 && !errno)
-			print_file_name(av[i], ac > 1 && i > 0);
+			print_file_name(av[i], ac > 1);
 		print_buffer(size, str, fd);
 		if (errno)
 			throw_err(prog, av[i]);
 	}
 	free(str);
-	return (1);
 }
 
 int	main(int ac, char *av[])

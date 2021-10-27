@@ -88,9 +88,12 @@ int	print_buffer(int size, char *buf, int fd)
 
 void	print_file_name(char *name, int is_line)
 {
-	if (is_line)
+	static int	cnt;
+
+	if (is_line && cnt)
 		f_print("\n");
 	f_print("==> ");
 	f_print(name);
 	f_print(" <==\n");
+	cnt++;
 }
