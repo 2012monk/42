@@ -17,12 +17,17 @@ void	free_map(t_board *map)
 	int	i;
 
 	i = -1;
+	map->width = 0;
+	map->height = 0;
+	map->fill = 0;
+	map->empty = 0;
+	map->obstacle = 0;
 	if (!map->board)
 		return ;
 	while (map->board[++i])
 	{
 		free(map->board[i]);
-		map->board[i] = NULL;
+		map->board[i] = 0;
 	}
 	free(map->board);
 	map->board = 0;

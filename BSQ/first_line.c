@@ -49,7 +49,7 @@ int	width_height(char *buf, t_board *board_info, int i, int j)
 		return (0);
 	board_info -> height = ht;
 	wt = 0;
-	while (buf[j] != '\n' && buf[j])
+	while (buf[j] && buf[j] != '\n')
 	{
 		wt++;
 		j++;

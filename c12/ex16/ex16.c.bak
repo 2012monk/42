@@ -27,7 +27,7 @@ int	main(void)
 		printf("%s", l->data);
 		l = l->next;
 	}
-	printf("%s","\n");
+	printf("\n===%s","\n");
 	ft_sorted_list_insert(&r, "4", c);
 	// ft_list_push_back(&r, "4");
 	while (r)

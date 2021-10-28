@@ -1,0 +1,39 @@
+
+#include "ft_list.h"
+#include <stdio.h>
+#include <stdlib.h>
+void	ft_list_merge(t_list **begin_list1, t_list *begin_list2)
+{
+	t_list	*head;
+
+	if (!begin_list1 || !*begin_list1)
+	{
+		*begin_list1 = begin_list2;
+		return ;
+	}
+	head = *begin_list1;
+	while (head->next)
+		head = head->next;
+	head->next = begin_list2;
+}
+
+t_list	*ft_create_elem(void *data)
+{
+	t_list	*node;
+
+	node = (t_list *) malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->data = data;
+	return (node);
+}
+
+int main()
+{
+	t_list *l = ft_create_elem("1");
+	t_list *r;
+
+	r = NULL;
+	ft_list_merge(&r, l);
+	printf("%s", r->data);
+}

@@ -13,7 +13,7 @@
 #include "ft_list.h"
 #include <stdlib.h>
 
-void	free_list(t_list *tmp)
+void	free_list(t_list *tmp, void (*free_fct)(void *))
 {
 	free_fct(tmp->data);
 	free(tmp);
@@ -35,7 +35,7 @@ void	ft_list_remove_if(t_list *begin_list, void *data_ref,
 		{
 			tmp = head;
 			head = head->next;
-			free_list(tmp);
+			free_list(tmp, free_fct);
 			if (!prev)
 				*begin_list = *head;
 			else

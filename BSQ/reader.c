@@ -23,11 +23,24 @@ void	f_memcpy(void *dst, void *src, unsigned int len)
 	if (!len)
 		return ;
 	i = -1;
-	while (++i < len / 8)
-		((long *) dst)[i] = ((long *) src)[i];
-	i = -1;
-	while (++i < len % 8)
-		((char *) dst)[len - i - 1] = ((char *) src)[len - i - 1];
+	if (src < dst)
+	{
+		to = (char *) dst;
+		from = (char *) src;
+		while (++i < len)
+			to[len - i - 1] = from[len - i - 1];
+	}
+	else
+	{
+		while (++i < len)
+			((char *) dst)[i] = ((char *) src)[i];
+	}
+}
+
+void	ft_strncpy(char *dst, char *src, unsigned int len)
+{
+	while (len--)
+		*dst++ = *src++;
 }
 
 void	*ft_realloc(void *src, unsigned int old_size, unsigned int new_size)
@@ -36,16 +49,13 @@ void	*ft_realloc(void *src, unsigned int old_size, unsigned int new_size)
 
 	if (!src)
 		return (malloc(sizeof(char) * new_size));
-	if (old_size < new_size)
-	{
-		pt = malloc(sizeof(char) * new_size);
-		if (pt == NULL)
-			return (NULL);
-		f_memcpy(pt, src, new_size);
-		free(src);
-		return (pt);
-	}
-	return (src);
+	(void) old_size;
+	pt = malloc(sizeof(char) * (new_size));
+	if (pt == NULL)
+		return (NULL);
+	f_memcpy(pt, src, old_size);
+	free(src);
+	return (pt);
 }
 
 void	*stdin_err(char *buf)
@@ -70,7 +80,7 @@ char	*parse_stdin(void)
 	size = read(0, buffer, BUF_SIZE);
 	while (size > 0)
 	{
-		buf = ft_realloc(buf, total, sizeof(char) * (total + size));
+		buf = ft_realloc(buf, total, sizeof(char) * (total + size + 1));
 		if (!buf)
 			return (NULL);
 		f_memcpy(&buf[total], buffer, size);

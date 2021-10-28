@@ -12,7 +12,7 @@
 
 #include "ft_list.h"
 
-t_list	*ft_creat(void *data)
+t_list	*ft_create(void *data)
 {
 	t_list	*node;
 
@@ -27,7 +27,7 @@ void	ft_list_push_front(t_list **begin_list, void *data)
 {
 	t_list	*node;
 
-	node = ft_creat(data);
+	node = ft_create(data);
 	if (!node)
 		return ;
 	if (begin_list[0])

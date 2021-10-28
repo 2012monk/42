@@ -21,5 +21,4 @@ typedef struct s_list
 	void			*data;
 }	t_list;
 
-t_list	*ft_creat_elem(void *data);
 #endif // !FT_LIST_H

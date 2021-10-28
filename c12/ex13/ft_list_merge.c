@@ -16,7 +16,7 @@ void	ft_list_merge(t_list **begin_list1, t_list *begin_list2)
 {
 	t_list	*head;
 
-	if (!begin_list1 || !begin_list1)
+	if (!begin_list1 || !*begin_list1)
 	{
 		*begin_list1 = begin_list2;
 		return ;

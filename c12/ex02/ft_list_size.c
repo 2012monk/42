@@ -24,32 +24,3 @@ int	ft_list_size(t_list *begin_list)
 	}
 	return (i);
 }
-
-// #include "ft_list.h"
-// #include <stdio.h>
-// t_list *ft_list_push_strs(int size, t_list *list);
-// int main()
-// {
-// 	char *l[] = {"1","2","#"};
-// 	t_list *r;
-// 	t_list *ll;
-
-// 	int i = 0;
-
-// 	r = malloc(sizeof(t_list));
-// 	r->data = l[0];
-// 	ll = r;
-// 	while (++i < 3)
-// 	{
-// 		r->next = malloc(sizeof(t_list));
-// 		r ->next-> data = l[i];
-// 		r = r->next;
-// 	}
-// 	r = ll;
-// 	while (r)
-// 	{
-// 		printf("%s\n", r->data);
-// 		r = r->next;
-// 	}
-// 	printf("%d", ft_list_size(ll));
-// }

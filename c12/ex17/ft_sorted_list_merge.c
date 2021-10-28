@@ -33,5 +33,5 @@ t_list	*sorting(t_list *n1, t_list *n2, int (*cmp)())
 void	ft_sorted_list_merge(t_list **begin_list1,
 	t_list **begin_list2, int (*cmp)())
 {
-	sorting(begin_list1, begin_list2, cmp);
+	sorting(*begin_list1, *begin_list2, cmp);
 }

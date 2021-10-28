@@ -51,20 +51,17 @@ int	into_board_check(char *buf, t_board *board_info, int idx)
 	while (*buf != '\0')
 	{
 		i = into_board(buf, board_info, idx++, 0);
-		if (i == -1)
+		if (board_info->height < idx || i == -1 || i == 0)
 		{
-			board_info -> board[--idx] = 0;
-			return (-1);
-		}
-		else if (i == 0)
-		{
-			board_info -> board[--idx] = 0;
+			board_info->board[idx - 1] = 0;
+			if (board_info->height <= idx || i == -1)
+				return (-1);
 			return (0);
 		}
 		buf = buf + board_info -> width + 1;
 	}
+	board_info -> board[idx] = 0;
 	if (idx != board_info -> height)
 		return (-1);
-	board_info -> board[idx] = 0;
 	return (1);
 }
